@@ -1,26 +1,33 @@
 import { Card } from "@/components/ui/card";
-import { BarChart2, Users, Workflow } from "lucide-react";
+import { DollarSign, Users, ShoppingCart, Package } from "lucide-react";
 
 const stats = [
   {
-    title: "Active Workflows",
-    value: "24",
-    icon: Workflow,
+    title: "Total Revenue",
+    value: "$54,234",
+    icon: DollarSign,
     change: "+12%",
     changeType: "positive",
   },
   {
-    title: "Total Users",
-    value: "1,234",
+    title: "Active Employees",
+    value: "234",
     icon: Users,
     change: "+3.2%",
     changeType: "positive",
   },
   {
-    title: "Processing Rate",
-    value: "98.5%",
-    icon: BarChart2,
-    change: "-0.1%",
+    title: "Sales Orders",
+    value: "456",
+    icon: ShoppingCart,
+    change: "+8.1%",
+    changeType: "positive",
+  },
+  {
+    title: "Inventory Items",
+    value: "1,234",
+    icon: Package,
+    change: "-2.1%",
     changeType: "negative",
   },
 ];
@@ -30,10 +37,10 @@ export default function Dashboard() {
     <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-white">Dashboard</h1>
-        <p className="text-gray-400 mt-2">Welcome to your LAYR dashboard</p>
+        <p className="text-gray-400 mt-2">Welcome to your ERP dashboard</p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {stats.map((stat) => (
           <Card
             key={stat.title}
@@ -59,12 +66,21 @@ export default function Dashboard() {
         ))}
       </div>
 
-      <Card className="p-6 bg-gray-800/50 border-gray-700 backdrop-blur-sm">
-        <h2 className="text-xl font-bold text-white mb-4">Recent Activity</h2>
-        <div className="text-gray-400">
-          Your recent activity will appear here once you start using the platform.
-        </div>
-      </Card>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <Card className="p-6 bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+          <h2 className="text-xl font-bold text-white mb-4">Recent Activity</h2>
+          <div className="text-gray-400">
+            Your recent activity will appear here.
+          </div>
+        </Card>
+        
+        <Card className="p-6 bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+          <h2 className="text-xl font-bold text-white mb-4">Quick Actions</h2>
+          <div className="text-gray-400">
+            Quick action buttons will appear here.
+          </div>
+        </Card>
+      </div>
     </div>
   );
 }

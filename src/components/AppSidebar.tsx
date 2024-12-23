@@ -1,4 +1,12 @@
-import { BarChart2, Settings, Workflow } from "lucide-react";
+import { 
+  LayoutDashboard, 
+  DollarSign, 
+  Users, 
+  ShoppingCart, 
+  Package, 
+  FolderKanban,
+  Settings
+} from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import {
   Sidebar,
@@ -15,12 +23,32 @@ const menuItems = [
   {
     title: "Dashboard",
     path: "/",
-    icon: BarChart2,
+    icon: LayoutDashboard,
   },
   {
-    title: "Workflows",
-    path: "/workflows",
-    icon: Workflow,
+    title: "Finance",
+    path: "/finance",
+    icon: DollarSign,
+  },
+  {
+    title: "HR",
+    path: "/hr",
+    icon: Users,
+  },
+  {
+    title: "Sales",
+    path: "/sales",
+    icon: ShoppingCart,
+  },
+  {
+    title: "Inventory",
+    path: "/inventory",
+    icon: Package,
+  },
+  {
+    title: "Projects",
+    path: "/projects",
+    icon: FolderKanban,
   },
   {
     title: "Settings",
@@ -36,7 +64,7 @@ export function AppSidebar() {
     <Sidebar>
       <SidebarContent>
         <div className="px-6 py-4">
-          <h1 className="text-2xl font-bold text-white">LAYR</h1>
+          <h1 className="text-2xl font-bold text-white">ERP System</h1>
         </div>
         <SidebarGroup>
           <SidebarGroupLabel>Menu</SidebarGroupLabel>
