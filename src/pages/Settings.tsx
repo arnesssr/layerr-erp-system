@@ -87,59 +87,6 @@ export default function Settings() {
       </Card>
 
       <Card className="p-6">
-        <h3 className="text-xl font-semibold mb-4">Notifications</h3>
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium">Email Notifications</p>
-              <p className="text-sm text-muted-foreground">
-                Receive email updates about your account
-              </p>
-            </div>
-            <Switch
-              checked={emailNotifications}
-              onCheckedChange={(checked) => {
-                setEmailNotifications(checked);
-                handleSettingChange("Email notifications", checked);
-              }}
-            />
-          </div>
-
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium">Push Notifications</p>
-              <p className="text-sm text-muted-foreground">
-                Receive push notifications in your browser
-              </p>
-            </div>
-            <Switch
-              checked={pushNotifications}
-              onCheckedChange={(checked) => {
-                setPushNotifications(checked);
-                handleSettingChange("Push notifications", checked);
-              }}
-            />
-          </div>
-
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="font-medium">Weekly Digest</p>
-              <p className="text-sm text-muted-foreground">
-                Get a weekly summary of your activity
-              </p>
-            </div>
-            <Switch
-              checked={weeklyDigest}
-              onCheckedChange={(checked) => {
-                setWeeklyDigest(checked);
-                handleSettingChange("Weekly digest", checked);
-              }}
-            />
-          </div>
-        </div>
-      </Card>
-
-      <Card className="p-6">
         <h3 className="text-xl font-semibold mb-4">System</h3>
         <div className="space-y-4">
           <div className="flex items-center justify-between">
@@ -202,6 +149,59 @@ export default function Settings() {
               onCheckedChange={(checked) => {
                 setAnalyticsEnabled(checked);
                 handleSettingChange("Usage analytics", checked);
+              }}
+            />
+          </div>
+        </div>
+      </Card>
+
+      <Card className="p-6">
+        <h3 className="text-xl font-semibold mb-4">Notifications</h3>
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="font-medium">Email Notifications</p>
+              <p className="text-sm text-muted-foreground">
+                Receive email updates about your account
+              </p>
+            </div>
+            <Switch
+              checked={emailNotifications}
+              onCheckedChange={(checked) => {
+                setEmailNotifications(checked);
+                handleSettingChange("Email notifications", checked);
+              }}
+            />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="font-medium">Push Notifications</p>
+              <p className="text-sm text-muted-foreground">
+                Receive push notifications in your browser
+              </p>
+            </div>
+            <Switch
+              checked={pushNotifications}
+              onCheckedChange={(checked) => {
+                setPushNotifications(checked);
+                handleSettingChange("Push notifications", checked);
+              }}
+            />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="font-medium">Weekly Digest</p>
+              <p className="text-sm text-muted-foreground">
+                Get a weekly summary of your activity
+              </p>
+            </div>
+            <Switch
+              checked={weeklyDigest}
+              onCheckedChange={(checked) => {
+                setWeeklyDigest(checked);
+                handleSettingChange("Weekly digest", checked);
               }}
             />
           </div>
