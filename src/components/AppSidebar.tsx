@@ -61,7 +61,7 @@ export function AppSidebar() {
   const location = useLocation();
 
   return (
-    <Sidebar className="group w-sidebar-collapsed hover:w-sidebar-expanded transition-all duration-300">
+    <Sidebar className="fixed group w-sidebar-collapsed hover:w-sidebar-expanded transition-all duration-300">
       <SidebarContent>
         <div className="px-4 py-4">
           <h1 className="text-xl font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">ERP System</h1>
