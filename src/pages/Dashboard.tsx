@@ -102,19 +102,19 @@ const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
 
 export default function Dashboard() {
   return (
-    <div className="space-y-6 px-1">
+    <div className="space-y-6">
       <div>
         <h1 className="text-3xl font-bold text-white">Dashboard</h1>
         <p className="text-gray-400 mt-2">Welcome to your ERP dashboard</p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 -ml-2">
         {stats.map((stat) => (
           <StatsCard key={stat.title} {...stat} />
         ))}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 -ml-2">
         <Card className="p-6 bg-gray-800/50 border-gray-700 backdrop-blur-sm">
           <h2 className="text-xl font-bold text-white mb-4">Revenue Trend</h2>
           <div className="h-[300px]">
