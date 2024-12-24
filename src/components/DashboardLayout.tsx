@@ -9,7 +9,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
         <AppSidebar />
         <div className="flex-1 flex flex-col">
           <TopNav />
-          <main className="flex-1 p-4 md:p-6 ml-[64px]">
+          <main className="flex-1 p-4 md:p-6 ml-16">
             {children}
           </main>
         </div>
