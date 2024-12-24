@@ -18,6 +18,10 @@ export default {
       },
     },
     extend: {
+      width: {
+        'sidebar-expanded': '240px',
+        'sidebar-collapsed': '64px',
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

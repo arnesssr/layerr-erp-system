@@ -61,28 +61,35 @@ export function AppSidebar() {
   const location = useLocation();
 
   return (
-    <Sidebar>
+    <Sidebar className="group w-sidebar-collapsed hover:w-sidebar-expanded transition-all duration-300">
       <SidebarContent>
-        <div className="px-6 py-4">
-          <h1 className="text-2xl font-bold text-white">ERP System</h1>
+        <div className="px-4 py-4">
+          <h1 className="text-xl font-bold text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300">ERP System</h1>
+          <div className="text-xl font-bold text-white opacity-100 group-hover:opacity-0 absolute top-4 left-4 transition-opacity duration-300">
+            ERP
+          </div>
         </div>
         <SidebarGroup>
-          <SidebarGroupLabel>Menu</SidebarGroupLabel>
+          <SidebarGroupLabel className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+            Menu
+          </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     asChild
-                    className={
-                      location.pathname === item.path
-                        ? "bg-blue-600 text-white"
-                        : "hover:bg-gray-800"
-                    }
+                    className={`
+                      ${location.pathname === item.path ? "bg-blue-600 text-white" : "hover:bg-gray-800"}
+                      transition-all duration-300
+                      overflow-hidden
+                    `}
                   >
-                    <Link to={item.path} className="flex items-center gap-2">
-                      <item.icon className="h-5 w-5" />
-                      <span>{item.title}</span>
+                    <Link to={item.path} className="flex items-center gap-3">
+                      <item.icon className="h-5 w-5 min-w-5" />
+                      <span className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 whitespace-nowrap">
+                        {item.title}
+                      </span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
