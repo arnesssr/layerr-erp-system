@@ -5,7 +5,12 @@ import {
   ShoppingCart, 
   Package, 
   FolderKanban,
-  Settings
+  Settings,
+  MessageSquare,
+  Calendar,
+  FileText,
+  Bell,
+  Inbox
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -49,6 +54,31 @@ const menuItems = [
     title: "Projects",
     path: "/projects",
     icon: FolderKanban,
+  },
+  {
+    title: "Messages",
+    path: "/messages",
+    icon: MessageSquare,
+  },
+  {
+    title: "Calendar",
+    path: "/calendar",
+    icon: Calendar,
+  },
+  {
+    title: "Documents",
+    path: "/documents",
+    icon: FileText,
+  },
+  {
+    title: "Notifications",
+    path: "/notifications",
+    icon: Bell,
+  },
+  {
+    title: "Inbox",
+    path: "/inbox",
+    icon: Inbox,
   },
   {
     title: "Settings",
