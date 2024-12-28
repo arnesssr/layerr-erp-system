@@ -1,134 +1,164 @@
-Welcome to the LAYR Automation Cloud Frontend
-Built with ❤️ by James Abira
 
-Project Overview
-LAYR Automation Cloud is a modern, intuitive, and powerful ERP (Enterprise Resource Planning) system designed to streamline business processes, increase efficiency, and support scalability for organizations of any size. This repository houses the frontend of the system, ensuring a sleek and user-friendly experience.
+# LAYR Automation Cloud Frontend
 
-Developed with a cutting-edge tech stack, LAYR simplifies complex workflows and offers a highly customizable interface for end-users.
+**Built with ❤️ by James Abira**
 
-GitHub Profile: James Abira (arnesssr)
+## Project Overview
 
-Features
-Customizable Dashboards: Tailor the interface to suit your business needs.
-Responsive Design: Built with mobile-first principles for seamless use across devices.
-Modular Architecture: Easily extendable components for scalability.
-Lightning-fast Performance: Leveraging Vite, React, and Tailwind CSS for optimal efficiency.
-User-centric Design: Clean UI powered by shadcn-ui for effortless interaction.
-Tech Stack
+**LAYR Automation Cloud** is a modern, intuitive, and powerful ERP (Enterprise Resource Planning) system designed to streamline business processes, increase efficiency, and support scalability for organizations of any size. This repository houses the **frontend** of the system, ensuring a sleek and user-friendly experience.
+
+**GitHub Profile**: [James Abira (arnesssr)](https://github.com/arnesssr)
+
+## Features
+
+- **Customizable Dashboards**: Tailor the interface to suit your business needs.
+- **Responsive Design**: Built with mobile-first principles for seamless use across devices.
+- **Modular Architecture**: Easily extendable components for scalability.
+- **Lightning-fast Performance**: Leveraging Vite, React, and Tailwind CSS for optimal efficiency.
+- **User-centric Design**: Clean UI powered by shadcn-ui for effortless interaction.
+
+## Tech Stack
+
 LAYR’s frontend is built with a selection of modern technologies to ensure top-notch performance and maintainability:
 
-Vite: High-speed build tool for a faster development experience.
-TypeScript: Type-safe programming for a robust codebase.
-React: Modular and reusable UI components for dynamic applications.
-shadcn-ui: Simplified component design and styling.
-Tailwind CSS: Utility-first CSS framework for rapid and consistent design.
-System Requirements
-Node.js: Version >=16.0.0
-npm: Version >=7.0.0
-Browser: Latest versions of Chrome, Firefox, Safari, or Edge recommended.
-Additional Tools: Docker (if deploying locally using Docker containers).
-Folder Structure
-plaintext
-Copy code
-src/  
-├── components/       # Reusable React components  
-├── pages/            # Page-level components  
-├── utils/            # Utility functions  
-├── assets/           # Static assets like images, icons, and styles  
-├── App.tsx           # Root app component  
-How to Get Started
+- **Vite**: High-speed build tool for a faster development experience.
+- **TypeScript**: Type-safe programming for a robust codebase.
+- **React**: Modular and reusable UI components for dynamic applications.
+- **shadcn-ui**: Simplified component design and styling.
+- **Tailwind CSS**: Utility-first CSS framework for rapid and consistent design.
+
+## System Requirements
+
+- **Node.js**: Version `>=16.0.0`
+- **npm**: Version `>=7.0.0`
+- **Browser**: Latest versions of Chrome, Firefox, Safari, or Edge recommended.
+- **Additional Tools**: Docker (if deploying locally using Docker containers).
+
+## Folder Structure
+
+```plaintext
+src/
+├── components/       # Reusable React components
+├── pages/            # Page-level components
+├── utils/            # Utility functions
+├── assets/           # Static assets like images, icons, and styles
+├── App.tsx           # Root app component
+```
+
+## How to Get Started
+
 There are multiple ways to contribute, edit, or enhance this project:
 
-Using Your Preferred IDE
-Clone the Repository:
+### Using Your Preferred IDE
 
-sh
-Copy code
-git clone https://github.com/arnesssr/layr-automation-cloud-58.git  
-Navigate to the Project Directory:
+1. **Clone the Repository**:
+   ```sh
+   git clone https://github.com/arnesssr/layr-automation-cloud-58.git
+   ```
 
-sh
-Copy code
-cd layr-automation-cloud-58  
-Install Dependencies:
+2. **Navigate to the Project Directory**:
+   ```sh
+   cd layr-automation-cloud-58
+   ```
 
-sh
-Copy code
-npm install  
-Run the Development Server:
+3. **Install Dependencies**:
+   ```sh
+   npm install
+   ```
 
-sh
-Copy code
-npm run dev  
-Open your browser and navigate to http://localhost:3000 to view the app in action.
+4. **Run the Development Server**:
+   ```sh
+   npm run dev
+   ```
 
-Direct Edits via GitHub
-Open the repository in your GitHub account: LAYR Frontend Repo
-Navigate to the file you wish to edit.
-Click the pencil icon to edit the file.
-Commit the changes directly to the main branch or create a pull request.
-Using GitHub Codespaces
-Navigate to the repository's main page.
-Click the green "Code" button.
-Select the "Codespaces" tab.
-Click "New Codespace" to launch an editing environment.
-Edit files within Codespaces and commit changes as needed.
-Deployment
+5. Open your browser and navigate to `http://localhost:3000` to view the app in action.
+
+### Direct Edits via GitHub
+
+1. Open the repository in your GitHub account: [LAYR Frontend Repo](https://github.com/arnesssr/layr-automation-cloud-58)
+2. Navigate to the file you wish to edit.
+3. Click the pencil icon to edit the file.
+4. Commit the changes directly to the main branch or create a pull request.
+
+### Using GitHub Codespaces
+
+1. Navigate to the repository's main page.
+2. Click the green **"Code"** button.
+3. Select the **"Codespaces"** tab.
+4. Click **"New Codespace"** to launch an editing environment.
+5. Edit files within Codespaces and commit changes as needed.
+
+## Deployment
+
 Deploying the LAYR frontend is quick and seamless.
 
-Deploy with Netlify:
-Create an account at Netlify.
-Link your repository to a new site.
-Configure the deployment settings:
-Build Command: npm run build
-Publish Directory: dist
-Hit Deploy and enjoy your live site!
-Deploy with Vercel:
-Log in at Vercel.
-Create a new project and link your GitHub repository.
-Vercel will automatically detect the build settings:
-Framework: React
-Build Command: npm run build
-Output Directory: dist
-Deploy your application and access it at your custom Vercel domain.
-Custom Domain
+### Deploy with **Netlify**:
+
+1. Create an account at [Netlify](https://www.netlify.com).
+2. Link your repository to a new site.
+3. Configure the deployment settings:
+   - **Build Command**: `npm run build`
+   - **Publish Directory**: `dist`
+4. Hit **Deploy** and enjoy your live site!
+
+### Deploy with **Vercel**:
+
+1. Log in at [Vercel](https://vercel.com).
+2. Create a new project and link your GitHub repository.
+3. Vercel will automatically detect the build settings:
+   - **Framework**: React
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+4. Deploy your application and access it at your custom Vercel domain.
+
+## Custom Domain
+
 To use your own domain, follow the steps in Netlify or Vercel documentation:
 
-Netlify Custom Domains
-Vercel Custom Domains
-Contribution Guidelines
+- [Netlify Custom Domains](https://docs.netlify.com/domains-https/custom-domains/)
+- [Vercel Custom Domains](https://vercel.com/docs/concepts/projects/domains)
+
+## Contribution Guidelines
+
 We welcome contributions! Follow these steps to get started:
 
-Fork the repository.
-Create a new branch for your feature:
-sh
-Copy code
-git checkout -b feature-name  
-Commit your changes with clear messages:
-sh
-Copy code
-git commit -m "Add feature X"  
-Push your changes to your forked repository:
-sh
-Copy code
-git push origin feature-name  
-Open a pull request on the main repository.
-Testing
+1. Fork the repository.
+2. Create a new branch for your feature:
+   ```sh
+   git checkout -b feature-name
+   ```
+3. Commit your changes with clear messages:
+   ```sh
+   git commit -m "Add feature X"
+   ```
+4. Push your changes to your forked repository:
+   ```sh
+   git push origin feature-name
+   ```
+5. Open a pull request on the main repository.
+
+## Testing
+
 To run tests, if any are implemented:
 
-Ensure dependencies are installed.
-Run the following command:
-sh
-Copy code
-npm run test  
+1. Ensure dependencies are installed.
+2. Run the following command:
+   ```sh
+   npm run test
+   ```
+
 Testing tools used: Jest, React Testing Library.
 
-About
-The LAYR ERP Frontend is part of a comprehensive ERP solution that empowers businesses to manage operations efficiently.
+## About
 
-Creator: James Abira
-GitHub: arnesssr
+The **LAYR ERP Frontend** is part of a comprehensive ERP solution that empowers businesses to manage operations efficiently.
 
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+**Creator**: James Abira  
+**GitHub**: [arnesssr](https://github.com/arnesssr)
+
+## License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+---
 
