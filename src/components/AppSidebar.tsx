@@ -9,14 +9,26 @@ import {
   MessageSquare,
   Calendar,
   FileText,
-  Bell,
-  Inbox,
   Building2,
   Truck,
   BarChart3,
   Factory,
   Warehouse,
-  ClipboardList
+  ClipboardList,
+  CreditCard,
+  BookOpen,
+  Calculator,
+  Receipt,
+  Box,
+  ShoppingBag,
+  UserPlus,
+  Target,
+  HeartHandshake,
+  Megaphone,
+  Headphones,
+  ClipboardCheck,
+  Timer,
+  ScrollText
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -29,8 +41,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarMenuSub,
-  SidebarMenuSubButton,
   SidebarMenuSubItem,
+  SidebarMenuSubButton,
 } from "@/components/ui/sidebar";
 
 const menuItems = [
@@ -40,44 +52,134 @@ const menuItems = [
     icon: LayoutDashboard,
   },
   {
-    title: "Finance",
+    title: "Financial Management",
     path: "/finance",
     icon: DollarSign,
-  },
-  {
-    title: "HR",
-    path: "/hr",
-    icon: Users,
-  },
-  {
-    title: "Sales",
-    path: "/sales",
-    icon: ShoppingCart,
-  },
-  {
-    title: "Inventory",
-    path: "/inventory",
-    icon: Warehouse,
-  },
-  {
-    title: "Manufacturing",
-    path: "/manufacturing",
-    icon: Factory,
+    subItems: [
+      {
+        title: "Accounts Payable",
+        path: "/finance/payable"
+      },
+      {
+        title: "Accounts Receivable",
+        path: "/finance/receivable"
+      },
+      {
+        title: "General Ledger",
+        path: "/finance/ledger"
+      },
+      {
+        title: "Budgeting",
+        path: "/finance/budgeting"
+      },
+      {
+        title: "Tax Management",
+        path: "/finance/tax"
+      }
+    ]
   },
   {
     title: "Supply Chain",
     path: "/supply-chain",
     icon: Truck,
+    subItems: [
+      {
+        title: "Inventory",
+        path: "/supply-chain/inventory"
+      },
+      {
+        title: "Procurement",
+        path: "/supply-chain/procurement"
+      },
+      {
+        title: "Orders",
+        path: "/supply-chain/orders"
+      },
+      {
+        title: "Warehouse",
+        path: "/supply-chain/warehouse"
+      }
+    ]
   },
   {
-    title: "Projects",
+    title: "Human Resources",
+    path: "/hr",
+    icon: Users,
+    subItems: [
+      {
+        title: "Payroll",
+        path: "/hr/payroll"
+      },
+      {
+        title: "Employee Records",
+        path: "/hr/employees"
+      },
+      {
+        title: "Recruitment",
+        path: "/hr/recruitment"
+      },
+      {
+        title: "Performance",
+        path: "/hr/performance"
+      }
+    ]
+  },
+  {
+    title: "CRM",
+    path: "/crm",
+    icon: HeartHandshake,
+    subItems: [
+      {
+        title: "Sales Automation",
+        path: "/crm/sales-automation"
+      },
+      {
+        title: "Customer Service",
+        path: "/crm/customer-service"
+      },
+      {
+        title: "Sales Force",
+        path: "/crm/sales-force"
+      }
+    ]
+  },
+  {
+    title: "Manufacturing",
+    path: "/manufacturing",
+    icon: Factory,
+    subItems: [
+      {
+        title: "Production Planning",
+        path: "/manufacturing/production"
+      },
+      {
+        title: "Quality Control",
+        path: "/manufacturing/quality"
+      },
+      {
+        title: "Bill of Materials",
+        path: "/manufacturing/bom"
+      }
+    ]
+  },
+  {
+    title: "Project Management",
     path: "/projects",
     icon: FolderKanban,
-  },
-  {
-    title: "Quality Control",
-    path: "/quality",
-    icon: ClipboardList,
+    subItems: [
+      {
+        title: "Resource Allocation",
+        path: "/projects/resources"
+      },
+      {
+        title: "Time Tracking",
+        path: "/projects/time"
+      },
+      {
+        title: "Project Accounting",
+        path: "/projects/accounting"
+      }
+    ]
   },
   {
     title: "Analytics",
@@ -91,13 +193,13 @@ const menuItems = [
     subItems: [
       {
         title: "Inbox",
-        path: "/messages/inbox",
+        path: "/messages/inbox"
       },
       {
         title: "Sent",
-        path: "/messages/sent",
-      },
-    ],
+        path: "/messages/sent"
+      }
+    ]
   },
   {
     title: "Calendar",
