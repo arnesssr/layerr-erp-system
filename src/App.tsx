@@ -15,8 +15,6 @@ import Settings from "./pages/Settings";
 import Messages from "./pages/Messages";
 import Calendar from "./pages/Calendar";
 import Documents from "./pages/Documents";
-import Notifications from "./pages/Notifications";
-import Inbox from "./pages/Inbox";
 
 const queryClient = new QueryClient();
 
@@ -35,11 +33,9 @@ const App = () => (
               <Route path="/sales" element={<Sales />} />
               <Route path="/inventory" element={<Inventory />} />
               <Route path="/projects" element={<Projects />} />
-              <Route path="/messages" element={<Messages />} />
+              <Route path="/messages/*" element={<Messages />} />
               <Route path="/calendar" element={<Calendar />} />
               <Route path="/documents" element={<Documents />} />
-              <Route path="/notifications" element={<Notifications />} />
-              <Route path="/inbox" element={<Inbox />} />
               <Route path="/settings" element={<Settings />} />
             </Routes>
           </DashboardLayout>

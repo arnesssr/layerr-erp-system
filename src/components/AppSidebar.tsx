@@ -10,7 +10,13 @@ import {
   Calendar,
   FileText,
   Bell,
-  Inbox
+  Inbox,
+  Building2,
+  Truck,
+  BarChart3,
+  Factory,
+  Warehouse,
+  ClipboardList
 } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -22,6 +28,9 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarMenuSub,
+  SidebarMenuSubButton,
+  SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 
 const menuItems = [
@@ -48,7 +57,17 @@ const menuItems = [
   {
     title: "Inventory",
     path: "/inventory",
-    icon: Package,
+    icon: Warehouse,
+  },
+  {
+    title: "Manufacturing",
+    path: "/manufacturing",
+    icon: Factory,
+  },
+  {
+    title: "Supply Chain",
+    path: "/supply-chain",
+    icon: Truck,
   },
   {
     title: "Projects",
@@ -56,9 +75,29 @@ const menuItems = [
     icon: FolderKanban,
   },
   {
+    title: "Quality Control",
+    path: "/quality",
+    icon: ClipboardList,
+  },
+  {
+    title: "Analytics",
+    path: "/analytics",
+    icon: BarChart3,
+  },
+  {
     title: "Messages",
     path: "/messages",
     icon: MessageSquare,
+    subItems: [
+      {
+        title: "Inbox",
+        path: "/messages/inbox",
+      },
+      {
+        title: "Sent",
+        path: "/messages/sent",
+      },
+    ],
   },
   {
     title: "Calendar",
@@ -69,16 +108,6 @@ const menuItems = [
     title: "Documents",
     path: "/documents",
     icon: FileText,
-  },
-  {
-    title: "Notifications",
-    path: "/notifications",
-    icon: Bell,
-  },
-  {
-    title: "Inbox",
-    path: "/inbox",
-    icon: Inbox,
   },
   {
     title: "Settings",
@@ -122,6 +151,20 @@ export function AppSidebar() {
                       </span>
                     </Link>
                   </SidebarMenuButton>
+                  {item.subItems && (
+                    <SidebarMenuSub>
+                      {item.subItems.map((subItem) => (
+                        <SidebarMenuSubItem key={subItem.title}>
+                          <SidebarMenuSubButton
+                            asChild
+                            isActive={location.pathname === subItem.path}
+                          >
+                            <Link to={subItem.path}>{subItem.title}</Link>
+                          </SidebarMenuSubButton>
+                        </SidebarMenuSubItem>
+                      ))}
+                    </SidebarMenuSub>
+                  )}
                 </SidebarMenuItem>
               ))}
             </SidebarMenu>

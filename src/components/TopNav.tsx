@@ -1,4 +1,4 @@
-import { Bell, Moon, Sun, User } from "lucide-react";
+import { Bell, MessageSquare, Moon, Sun, User } from "lucide-react";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -10,6 +10,7 @@ import {
 } from "./ui/dropdown-menu";
 import { useTheme } from "./ThemeProvider";
 import { useToast } from "./ui/use-toast";
+import { Link } from "react-router-dom";
 
 export function TopNav() {
   const { theme, setTheme } = useTheme();
@@ -25,6 +26,18 @@ export function TopNav() {
   return (
     <div className="flex items-center gap-4 p-4">
       <div className="flex-1" />
+      <Link to="/messages">
+        <Button
+          variant="ghost"
+          size="icon"
+          className="relative"
+        >
+          <MessageSquare className="h-5 w-5" />
+          <span className="absolute -top-1 -right-1 h-4 w-4 rounded-full bg-blue-500 text-[10px] font-bold text-white flex items-center justify-center">
+            3
+          </span>
+        </Button>
+      </Link>
       <Button
         variant="ghost"
         size="icon"
