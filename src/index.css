@@ -69,13 +69,12 @@
   }
 }
 
-/* Custom scrollbar styles */
 .scrollbar-thin {
   scrollbar-width: thin;
 }
 
 .scrollbar-thin::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 
 .scrollbar-thin::-webkit-scrollbar-track {
@@ -83,12 +82,12 @@
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb {
-  background-color: rgba(156, 163, 175, 0.5);
-  border-radius: 3px;
+  background-color: rgba(156, 163, 175, 0.3);
+  border-radius: 2px;
 }
 
 .scrollbar-thin::-webkit-scrollbar-thumb:hover {
-  background-color: rgba(156, 163, 175, 0.7);
+  background-color: rgba(156, 163, 175, 0.5);
 }
 
 /* Hide scrollbar when sidebar is collapsed */
