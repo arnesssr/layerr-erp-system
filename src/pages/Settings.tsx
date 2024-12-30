@@ -7,23 +7,50 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
+// Theme options
+const themeOptions = [
+  {
+    name: "Default",
+    primary: "#0EA5E9",
+    accent: "#8B5CF6",
+  },
+  {
+    name: "Ocean",
+    primary: "#0EA5E9",
+    accent: "#06B6D4",
+  },
+  {
+    name: "Forest",
+    primary: "#059669",
+    accent: "#10B981",
+  },
+  {
+    name: "Sunset",
+    primary: "#F97316",
+    accent: "#FB923C",
+  },
+  {
+    name: "Royal",
+    primary: "#9b87f5",
+    accent: "#7E69AB",
+  }
+];
+
 export default function Settings() {
   const { theme, setTheme } = useTheme();
   const [date, setDate] = useState<Date | undefined>(new Date());
+  const [selectedTheme, setSelectedTheme] = useState(themeOptions[0]);
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [pushNotifications, setPushNotifications] = useState(true);
-  const [weeklyDigest, setWeeklyDigest] = useState(false);
   const [autoSave, setAutoSave] = useState(true);
-  const [compactView, setCompactView] = useState(false);
-  const [twoFactorAuth, setTwoFactorAuth] = useState(false);
-  const [dataSync, setDataSync] = useState(true);
-  const [backupEnabled, setBackupEnabled] = useState(false);
-  const [analyticsEnabled, setAnalyticsEnabled] = useState(true);
 
-  const handleThemeChange = (isDark: boolean) => {
-    const newTheme = isDark ? "dark" : "light";
-    setTheme(newTheme);
-    toast.success(`Theme changed to ${newTheme} mode`);
+  const handleThemeChange = (themeName: string) => {
+    const newTheme = themeOptions.find(t => t.name === themeName) || themeOptions[0];
+    setSelectedTheme(newTheme);
+    // Apply theme colors to CSS variables
+    document.documentElement.style.setProperty('--primary', newTheme.primary);
+    document.documentElement.style.setProperty('--accent', newTheme.accent);
+    toast.success(`Theme changed to ${newTheme.name}`);
   };
 
   const handleSettingChange = (setting: string, value: boolean) => {
@@ -38,14 +65,39 @@ export default function Settings() {
         <TabsList>
           <TabsTrigger value="appearance">Appearance</TabsTrigger>
           <TabsTrigger value="notifications">Notifications</TabsTrigger>
-          <TabsTrigger value="security">Security</TabsTrigger>
           <TabsTrigger value="system">System</TabsTrigger>
-          <TabsTrigger value="calendar">Calendar</TabsTrigger>
         </TabsList>
 
         <TabsContent value="appearance">
           <Card className="p-6">
-            <h3 className="text-xl font-semibold mb-4">Appearance Settings</h3>
+            <h3 className="text-xl font-semibold mb-4">Theme Settings</h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+              {themeOptions.map((themeOption) => (
+                <button
+                  key={themeOption.name}
+                  onClick={() => handleThemeChange(themeOption.name)}
+                  className={cn(
+                    "p-4 rounded-lg border transition-all",
+                    selectedTheme.name === themeOption.name 
+                      ? "border-primary ring-2 ring-primary/20" 
+                      : "border-border hover:border-primary/50"
+                  )}
+                >
+                  <div className="flex gap-2 mb-2">
+                    <div 
+                      className="w-6 h-6 rounded-full" 
+                      style={{ backgroundColor: themeOption.primary }}
+                    />
+                    <div 
+                      className="w-6 h-6 rounded-full" 
+                      style={{ backgroundColor: themeOption.accent }}
+                    />
+                  </div>
+                  <p className="text-sm font-medium">{themeOption.name}</p>
+                </button>
+              ))}
+            </div>
+
             <div className="space-y-4">
               <div className="flex items-center justify-between">
                 <div>
@@ -56,23 +108,7 @@ export default function Settings() {
                 </div>
                 <Switch
                   checked={theme === "dark"}
-                  onCheckedChange={handleThemeChange}
-                />
-              </div>
-              
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium">Compact View</p>
-                  <p className="text-sm text-muted-foreground">
-                    Reduce spacing between elements
-                  </p>
-                </div>
-                <Switch
-                  checked={compactView}
-                  onCheckedChange={(checked) => {
-                    setCompactView(checked);
-                    handleSettingChange("Compact view", checked);
-                  }}
+                  onCheckedChange={(checked) => setTheme(checked ? "dark" : "light")}
                 />
               </div>
             </div>
@@ -114,45 +150,6 @@ export default function Settings() {
                   }}
                 />
               </div>
-
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium">Weekly Digest</p>
-                  <p className="text-sm text-muted-foreground">
-                    Get a weekly summary of your activity
-                  </p>
-                </div>
-                <Switch
-                  checked={weeklyDigest}
-                  onCheckedChange={(checked) => {
-                    setWeeklyDigest(checked);
-                    handleSettingChange("Weekly digest", checked);
-                  }}
-                />
-              </div>
-            </div>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="security">
-          <Card className="p-6">
-            <h3 className="text-xl font-semibold mb-4">Security Settings</h3>
-            <div className="space-y-4">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium">Two-Factor Authentication</p>
-                  <p className="text-sm text-muted-foreground">
-                    Add an extra layer of security to your account
-                  </p>
-                </div>
-                <Switch
-                  checked={twoFactorAuth}
-                  onCheckedChange={(checked) => {
-                    setTwoFactorAuth(checked);
-                    handleSettingChange("Two-factor authentication", checked);
-                  }}
-                />
-              </div>
             </div>
           </Card>
         </TabsContent>
@@ -176,58 +173,10 @@ export default function Settings() {
                   }}
                 />
               </div>
-
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="font-medium">Data Synchronization</p>
-                  <p className="text-sm text-muted-foreground">
-                    Keep your data synchronized across devices
-                  </p>
-                </div>
-                <Switch
-                  checked={dataSync}
-                  onCheckedChange={(checked) => {
-                    setDataSync(checked);
-                    handleSettingChange("Data synchronization", checked);
-                  }}
-                />
-              </div>
-            </div>
-          </Card>
-        </TabsContent>
-
-        <TabsContent value="calendar">
-          <Card className="p-6">
-            <h3 className="text-xl font-semibold mb-4">Calendar Settings</h3>
-            <div className="space-y-4">
-              <Calendar
-                mode="single"
-                selected={date}
-                onSelect={setDate}
-                className="rounded-md border"
-              />
             </div>
           </Card>
         </TabsContent>
       </Tabs>
-
-      <Card className="p-6">
-        <h3 className="text-xl font-semibold mb-4 text-red-500">Danger Zone</h3>
-        <div className="space-y-4">
-          <div>
-            <p className="font-medium text-red-500">Delete Account</p>
-            <p className="text-sm text-muted-foreground mb-2">
-              Permanently delete your account and all associated data
-            </p>
-            <Button 
-              variant="destructive"
-              onClick={() => toast.error("This feature is not implemented yet")}
-            >
-              Delete Account
-            </Button>
-          </div>
-        </div>
-      </Card>
     </div>
   );
 }

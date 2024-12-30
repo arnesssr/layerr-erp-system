@@ -15,6 +15,7 @@ export function IconBar() {
         <div 
           key={item.title}
           className="relative w-10 h-10 flex items-center justify-center rounded-md hover:bg-accent cursor-pointer group"
+          title={item.title} // Add tooltip on hover
         >
           <item.icon className="h-5 w-5" />
           {item.subItems && (
