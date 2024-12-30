@@ -6,6 +6,7 @@ import { useTheme } from "@/components/ThemeProvider";
 import { toast } from "sonner";
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { cn } from "@/lib/utils"; // Added this import
 
 // Theme options
 const themeOptions = [
