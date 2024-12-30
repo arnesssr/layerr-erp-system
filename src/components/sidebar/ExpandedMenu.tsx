@@ -35,10 +35,7 @@ export function ExpandedMenu() {
               <DropdownMenu>
                 <DropdownMenuTrigger className="w-full">
                   <div className="flex items-center justify-between w-full px-3 py-2 rounded-md hover:bg-accent cursor-pointer">
-                    <div className="flex items-center gap-3">
-                      <item.icon className="h-5 w-5" />
-                      <span>{item.title}</span>
-                    </div>
+                    <span className="pl-7">{item.title}</span>
                     <ChevronDown className="h-4 w-4" />
                   </div>
                 </DropdownMenuTrigger>
@@ -61,10 +58,9 @@ export function ExpandedMenu() {
             ) : (
               <a
                 href={item.path}
-                className="flex items-center gap-3 w-full px-3 py-2 rounded-md hover:bg-accent"
+                className="flex items-center w-full px-3 py-2 rounded-md hover:bg-accent"
               >
-                <item.icon className="h-5 w-5" />
-                <span>{item.title}</span>
+                <span className="pl-7">{item.title}</span>
               </a>
             )}
           </div>
