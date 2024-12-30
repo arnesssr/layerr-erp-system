@@ -30,7 +30,7 @@ export function ExpandedMenu() {
     >
       <div className="py-4 px-2">
         {menuItems.map((item) => (
-          <div key={item.title} className="mb-1">
+          <div key={item.title} className="mb-1 relative">
             {item.subItems ? (
               <DropdownMenu>
                 <DropdownMenuTrigger className="w-full">
@@ -40,9 +40,10 @@ export function ExpandedMenu() {
                   </div>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent 
-                  side="right" 
-                  className="min-w-[200px]" 
+                  className="w-[200px] -ml-2 mt-0" 
                   align="start"
+                  alignOffset={0}
+                  sideOffset={0}
                 >
                   {item.subItems.map((subItem) => (
                     <a

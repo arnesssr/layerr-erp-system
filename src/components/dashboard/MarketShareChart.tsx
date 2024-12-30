@@ -8,7 +8,12 @@ const marketShareData = [
   { name: "Product D", value: 100 },
 ];
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const COLORS = [
+  "#1EAEDB", // Bright Blue
+  "#33C3F0", // Sky Blue
+  "#0FA0CE", // Bright Blue
+  "#0EA5E9", // Ocean Blue
+];
 
 export function MarketShareChart() {
   return (

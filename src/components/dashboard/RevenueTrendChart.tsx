@@ -25,7 +25,14 @@ const revenueData = [
   { month: "Jun", revenue: 5500 },
 ];
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#8884d8", "#82ca9d"];
+const COLORS = [
+  "#9b87f5", // Primary Purple
+  "#7E69AB", // Secondary Purple
+  "#6E59A5", // Tertiary Purple
+  "#1A1F2C", // Dark Purple
+  "#D6BCFA", // Light Purple
+  "#8B5CF6", // Vivid Purple
+];
 
 export function RevenueTrendChart() {
   const [chartType, setChartType] = useState<ChartType>("line");
@@ -48,7 +55,7 @@ export function RevenueTrendChart() {
             <Line
               type="monotone"
               dataKey="revenue"
-              stroke="hsl(var(--primary))"
+              stroke="#9b87f5"
               strokeWidth={2}
             />
           </LineChart>
@@ -66,7 +73,7 @@ export function RevenueTrendChart() {
                 borderRadius: "0.5rem",
               }}
             />
-            <Bar dataKey="revenue" fill="hsl(var(--primary))" />
+            <Bar dataKey="revenue" fill="#9b87f5" />
           </BarChart>
         );
       case "pie":

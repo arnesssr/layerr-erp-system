@@ -23,7 +23,12 @@ const salesData = [
   { category: "Books", sales: 150 },
 ];
 
-const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042"];
+const COLORS = [
+  "#0EA5E9", // Ocean Blue
+  "#F97316", // Bright Orange
+  "#D946EF", // Magenta Pink
+  "#8B5CF6", // Vivid Purple
+];
 
 export function SalesByCategoryChart() {
   const [chartType, setChartType] = useState<ChartType>("bar");
@@ -43,7 +48,11 @@ export function SalesByCategoryChart() {
                 borderRadius: "0.5rem",
               }}
             />
-            <Bar dataKey="sales" fill="hsl(var(--primary))" />
+            <Bar dataKey="sales">
+              {salesData.map((entry, index) => (
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+              ))}
+            </Bar>
           </BarChart>
         );
       case "line":
@@ -62,7 +71,7 @@ export function SalesByCategoryChart() {
             <Line
               type="monotone"
               dataKey="sales"
-              stroke="hsl(var(--primary))"
+              stroke="#0EA5E9"
               strokeWidth={2}
             />
           </LineChart>
