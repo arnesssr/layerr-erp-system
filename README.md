@@ -1,4 +1,3 @@
-
 # LAYR Automation Cloud Frontend
 
 **Built with ❤️ by James Abira**
@@ -19,7 +18,7 @@
 
 ## Tech Stack
 
-LAYR’s frontend is built with a selection of modern technologies to ensure top-notch performance and maintainability:
+LAYR's frontend is built with a selection of modern technologies to ensure top-notch performance and maintainability:
 
 - **Vite**: High-speed build tool for a faster development experience.
 - **TypeScript**: Type-safe programming for a robust codebase.
@@ -161,4 +160,3 @@ The **LAYR ERP Frontend** is part of a comprehensive ERP solution that empowers 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
 ---
-
