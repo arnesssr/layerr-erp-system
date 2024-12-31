@@ -52,7 +52,7 @@ There are multiple ways to contribute, edit, or enhance this project:
 
 1. **Clone the Repository**:
    ```sh
-   git clone https://github.com/arnesssr/layr-automation-cloud-58.git
+   git clone https://github.com/arnesssr/layr-erp-system.git
    ```
 
 2. **Navigate to the Project Directory**:
