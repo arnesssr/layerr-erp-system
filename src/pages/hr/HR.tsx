@@ -42,7 +42,7 @@ export default function HR() {
           value="12"
           icon={Building2}
           change="0"
-          changeType="neutral"
+          changeType="positive"
         />
         <StatsCard
           title="Performance Reviews"
