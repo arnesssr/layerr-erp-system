@@ -57,7 +57,7 @@ There are multiple ways to contribute, edit, or enhance this project:
 
 2. **Navigate to the Project Directory**:
    ```sh
-   cd layr-automation-cloud-58
+   cd layr-erp-system
    ```
 
 3. **Install Dependencies**:
@@ -74,7 +74,7 @@ There are multiple ways to contribute, edit, or enhance this project:
 
 ### Direct Edits via GitHub
 
-1. Open the repository in your GitHub account: [LAYR Frontend Repo](https://github.com/arnesssr/layr-automation-cloud-58)
+1. Open the repository in your GitHub account: [LAYR Frontend Repo](https://github.com/arnesssr/layr-erp-system)
 2. Navigate to the file you wish to edit.
 3. Click the pencil icon to edit the file.
 4. Commit the changes directly to the main branch or create a pull request.
