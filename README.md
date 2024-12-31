@@ -1,6 +1,4 @@
-# LAYR Automation Cloud Frontend
-
-**Built with ❤️ by James Abira**
+# LAYR Automation Cloud Frontend(erp)
 
 ## Project Overview
 
