@@ -1,5 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
-import { toast } from "sonner";
+import React, { createContext, useContext, useState, useEffect } from "react";
 
 interface AuthContextType {
   isAuthenticated: boolean;
@@ -12,28 +11,34 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    // Check localStorage on initial load
+    return localStorage.getItem("isAuthenticated") === "true";
+  });
+
+  // Persist auth state
+  useEffect(() => {
+    localStorage.setItem("isAuthenticated", isAuthenticated.toString());
+  }, [isAuthenticated]);
 
   const login = (email: string, password: string) => {
-    // Simulate authentication
+    console.log("Login attempt with:", email);
     setIsAuthenticated(true);
-    toast.success("Logged in successfully");
   };
 
   const register = (email: string, password: string) => {
-    // Simulate registration
+    console.log("Register attempt with:", email);
     setIsAuthenticated(true);
-    toast.success("Registered successfully");
   };
 
   const logout = () => {
     setIsAuthenticated(false);
-    toast.success("Logged out successfully");
+    localStorage.removeItem("isAuthenticated");
   };
 
   const bypassAuth = () => {
+    console.log("Bypassing authentication");
     setIsAuthenticated(true);
-    toast.success("Auth bypassed for testing");
   };
 
   return (
@@ -46,7 +51,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 export function useAuth() {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuth must be used within an AuthProvider');
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 }

@@ -1,4 +1,4 @@
-import { Bell, MessageSquare, Moon, Sun, User } from "lucide-react";
+import { Bell, MessageSquare, Moon, Sun, User, LogOut } from "lucide-react";
 import { Button } from "./ui/button";
 import {
   DropdownMenu,
@@ -10,16 +10,28 @@ import {
 } from "./ui/dropdown-menu";
 import { useTheme } from "./ThemeProvider";
 import { useToast } from "./ui/use-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "./auth/AuthContext";
 
 export function TopNav() {
   const { theme, setTheme } = useTheme();
   const { toast } = useToast();
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleNotificationClick = () => {
     toast({
       title: "No new notifications",
       description: "You're all caught up!",
+    });
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+    toast({
+      title: "Logged out",
+      description: "You have been successfully logged out",
     });
   };
 
@@ -70,10 +82,15 @@ export function TopNav() {
           <DropdownMenuLabel>My Account</DropdownMenuLabel>
           <DropdownMenuSeparator />
           <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>Settings</DropdownMenuItem>
+          <DropdownMenuItem>
+            <Link to="/settings">Settings</Link>
+          </DropdownMenuItem>
           <DropdownMenuItem>Support</DropdownMenuItem>
           <DropdownMenuSeparator />
-          <DropdownMenuItem>Log out</DropdownMenuItem>
+          <DropdownMenuItem onClick={handleLogout}>
+            <LogOut className="h-4 w-4 mr-2" />
+            Log out
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </div>

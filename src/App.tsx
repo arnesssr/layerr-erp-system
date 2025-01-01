@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import { DashboardLayout } from "./components/DashboardLayout";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { AuthProvider, useAuth } from "./components/auth/AuthContext";
@@ -64,12 +64,15 @@ const queryClient = new QueryClient();
 // Protected Route wrapper
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated } = useAuth();
+  const navigate = useNavigate();
   
-  if (!isAuthenticated) {
-    return <Navigate to="/login" replace />;
-  }
+  useEffect(() => {
+    if (!isAuthenticated) {
+      navigate("/login");
+    }
+  }, [isAuthenticated, navigate]);
   
-  return <>{children}</>;
+  return isAuthenticated ? <>{children}</> : null;
 };
 
 const App = () => (
