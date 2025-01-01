@@ -5,8 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { DashboardLayout } from "./components/DashboardLayout";
 import { ThemeProvider } from "./components/ThemeProvider";
+import { AuthProvider } from "./components/auth/AuthContext";
 
-// Main pages
 import Dashboard from "./pages/Dashboard";
 import Settings from "./pages/Settings";
 import Calendar from "./pages/Calendar";
@@ -61,12 +61,13 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <ThemeProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <DashboardLayout>
-            <Routes>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <DashboardLayout>
+              <Routes>
               {/* Main Routes */}
               <Route path="/" element={<Dashboard />} />
               <Route path="/settings" element={<Settings />} />
@@ -114,10 +115,11 @@ const App = () => (
               <Route path="/projects/resources" element={<Resources />} />
               <Route path="/projects/time" element={<TimeTracking />} />
               <Route path="/projects/accounting" element={<ProjectAccounting />} />
-            </Routes>
-          </DashboardLayout>
-        </BrowserRouter>
-      </TooltipProvider>
+              </Routes>
+            </DashboardLayout>
+          </BrowserRouter>
+        </TooltipProvider>
+      </AuthProvider>
     </ThemeProvider>
   </QueryClientProvider>
 );
