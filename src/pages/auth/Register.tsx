@@ -6,24 +6,24 @@ import { Card } from "@/components/ui/card";
 import { useAuth } from "@/components/auth/AuthContext";
 import { toast } from "sonner";
 
-export default function Login() {
+export default function Register() {
   const navigate = useNavigate();
-  const { login, bypassAuth } = useAuth();
+  const { register } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email || !password) {
+    if (!email || !password || !confirmPassword) {
       toast.error("Please fill in all fields");
       return;
     }
-    login(email, password);
-    navigate("/");
-  };
-
-  const handleBypass = () => {
-    bypassAuth();
+    if (password !== confirmPassword) {
+      toast.error("Passwords do not match");
+      return;
+    }
+    register(email, password);
     navigate("/");
   };
 
@@ -31,8 +31,8 @@ export default function Login() {
     <div className="min-h-screen flex items-center justify-center bg-background">
       <Card className="w-full max-w-md p-8">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold">Welcome Back</h1>
-          <p className="text-muted-foreground mt-2">Sign in to your account</p>
+          <h1 className="text-3xl font-bold">Create Account</h1>
+          <p className="text-muted-foreground mt-2">Sign up for a new account</p>
         </div>
         
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -54,30 +54,28 @@ export default function Login() {
               className="w-full"
             />
           </div>
+          <div>
+            <Input
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="w-full"
+            />
+          </div>
           <Button type="submit" className="w-full">
-            Sign In
+            Create Account
           </Button>
         </form>
 
-        <div className="mt-6">
-          <Button
-            type="button"
-            variant="outline"
-            className="w-full"
-            onClick={handleBypass}
-          >
-            Bypass Auth (Testing)
-          </Button>
-        </div>
-
         <p className="text-center text-sm text-muted-foreground mt-6">
-          Don't have an account?{" "}
+          Already have an account?{" "}
           <Button
             variant="link"
             className="p-0 h-auto font-semibold"
-            onClick={() => navigate("/register")}
+            onClick={() => navigate("/login")}
           >
-            Register
+            Sign In
           </Button>
         </p>
       </Card>
