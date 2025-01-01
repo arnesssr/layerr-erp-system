@@ -1,57 +1,39 @@
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Switch } from "@/components/ui/switch";
-import { Calendar } from "@/components/ui/calendar";
 import { useTheme } from "@/components/ThemeProvider";
 import { toast } from "sonner";
-import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { cn } from "@/lib/utils"; // Added this import
+import { cn } from "@/lib/utils";
 
 // Theme options
 const themeOptions = [
   {
     name: "Default",
-    primary: "#0EA5E9",
-    accent: "#8B5CF6",
-  },
-  {
-    name: "Ocean",
-    primary: "#0EA5E9",
-    accent: "#06B6D4",
-  },
-  {
-    name: "Forest",
-    primary: "#059669",
-    accent: "#10B981",
-  },
-  {
-    name: "Sunset",
-    primary: "#F97316",
-    accent: "#FB923C",
+    colorTheme: "default" as const,
+    primary: "hsl(221.2 83% 53%)",
+    accent: "hsl(217.2 91.2% 59.8%)",
   },
   {
     name: "Royal",
-    primary: "#9b87f5",
-    accent: "#7E69AB",
+    colorTheme: "royal" as const,
+    primary: "hsl(255 60% 75%)",
+    accent: "hsl(255 40% 65%)",
   }
 ];
 
 export default function Settings() {
-  const { theme, setTheme } = useTheme();
-  const [date, setDate] = useState<Date | undefined>(new Date());
-  const [selectedTheme, setSelectedTheme] = useState(themeOptions[0]);
+  const { theme, setTheme, colorTheme, setColorTheme } = useTheme();
   const [emailNotifications, setEmailNotifications] = useState(true);
   const [pushNotifications, setPushNotifications] = useState(true);
   const [autoSave, setAutoSave] = useState(true);
 
   const handleThemeChange = (themeName: string) => {
-    const newTheme = themeOptions.find(t => t.name === themeName) || themeOptions[0];
-    setSelectedTheme(newTheme);
-    // Apply theme colors to CSS variables
-    document.documentElement.style.setProperty('--primary', newTheme.primary);
-    document.documentElement.style.setProperty('--accent', newTheme.accent);
-    toast.success(`Theme changed to ${newTheme.name}`);
+    const newTheme = themeOptions.find(t => t.name === themeName);
+    if (newTheme) {
+      setColorTheme(newTheme.colorTheme);
+      toast.success(`Theme changed to ${newTheme.name}`);
+    }
   };
 
   const handleSettingChange = (setting: string, value: boolean) => {
@@ -79,7 +61,7 @@ export default function Settings() {
                   onClick={() => handleThemeChange(themeOption.name)}
                   className={cn(
                     "p-4 rounded-lg border transition-all",
-                    selectedTheme.name === themeOption.name 
+                    colorTheme === themeOption.colorTheme
                       ? "border-primary ring-2 ring-primary/20" 
                       : "border-border hover:border-primary/50"
                   )}
