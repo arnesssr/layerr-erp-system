@@ -146,6 +146,25 @@ To run tests, if any are implemented:
 
 Testing tools used: Jest, React Testing Library.
 
+## Running the Application
+
+1. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+2. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+   Or run in production mode:
+   ```bash
+   npm start
+   ```
+
+   The application will be available at http://localhost:3000
+
 ## About
 
 The **LAYR ERP Frontend** is part of a comprehensive ERP solution that empowers businesses to manage operations efficiently.
@@ -158,3 +177,4 @@ The **LAYR ERP Frontend** is part of a comprehensive ERP solution that empowers 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
 ---
+````

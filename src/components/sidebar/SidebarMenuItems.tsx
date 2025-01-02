@@ -67,24 +67,24 @@ export const menuItems = [
   },
   {
     title: "Inventory",
-    path: "/inventory",
+    path: "/supply-chain/inventory", // Updated path to match component location
     icon: Package,
     subItems: [
-      { title: "Stock Management", path: "/inventory/stock" },
-      { title: "Barcode Scanning", path: "/inventory/barcode" },
-      { title: "Tracking", path: "/inventory/tracking" },
-      { title: "Transfers", path: "/inventory/transfers" },
+      { title: "Stock Management", path: "/supply-chain/inventory" },
+      { title: "Barcode Scanning", path: "/supply-chain/inventory/barcode" },
+      { title: "Tracking", path: "/supply-chain/inventory/tracking" },
+      { title: "Transfers", path: "/supply-chain/inventory/transfers" },
     ]
   },
   {
     title: "Procurement",
-    path: "/procurement",
+    path: "/supply-chain/procurement", // Updated path to match component location
     icon: ShoppingCart,
     subItems: [
-      { title: "Suppliers", path: "/procurement/suppliers" },
-      { title: "Purchase Orders", path: "/procurement/orders" },
-      { title: "Approvals", path: "/procurement/approvals" },
-      { title: "Analytics", path: "/procurement/analytics" },
+      { title: "Suppliers", path: "/supply-chain/procurement/suppliers" },
+      { title: "Purchase Orders", path: "/supply-chain/procurement/orders" },
+      { title: "Approvals", path: "/supply-chain/procurement/approvals" },
+      { title: "Analytics", path: "/supply-chain/procurement/analytics" },
     ]
   },
   {
