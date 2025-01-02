@@ -85,68 +85,172 @@ const App = () => (
           <Sonner />
           <BrowserRouter>
             <Routes>
-              {/* Auth Routes */}
+              {/* Public Routes */}
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               
-              {/* Protected Routes */}
-              <Route path="/" element={
+              {/* Dashboard Layout Routes */}
+              <Route path="/" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
+              <Route path="/settings" element={<DashboardLayout><Settings /></DashboardLayout>} />
+              <Route path="/calendar" element={<DashboardLayout><Calendar /></DashboardLayout>} />
+              <Route path="/documents" element={<DashboardLayout><Documents /></DashboardLayout>} />
+              <Route path="/messages/*" element={<DashboardLayout><Messages /></DashboardLayout>} />
+              <Route path="/analytics" element={<DashboardLayout><Analytics /></DashboardLayout>} />
+
+              {/* Protected Routes - Financial Management */}
+              <Route path="/finance" element={
                 <ProtectedRoute>
-                  <DashboardLayout>
-                    <Routes>
-                      <Route path="/" element={<Dashboard />} />
-                      <Route path="/settings" element={<Settings />} />
-                      <Route path="/calendar" element={<Calendar />} />
-                      <Route path="/documents" element={<Documents />} />
-                      <Route path="/messages/*" element={<Messages />} />
-                      <Route path="/analytics" element={<Analytics />} />
-
-                      {/* Financial Management Routes */}
-                      <Route path="/finance" element={<Finance />} />
-                      <Route path="/finance/payable" element={<AccountsPayable />} />
-                      <Route path="/finance/receivable" element={<AccountsReceivable />} />
-                      <Route path="/finance/ledger" element={<GeneralLedger />} />
-                      <Route path="/finance/budgeting" element={<Budgeting />} />
-                      <Route path="/finance/tax" element={<TaxManagement />} />
-
-                      {/* Supply Chain Routes */}
-                      <Route path="/supply-chain" element={<SupplyChain />} />
-                      <Route path="/supply-chain/inventory" element={<Inventory />} />
-                      <Route path="/supply-chain/procurement" element={<Procurement />} />
-                      <Route path="/supply-chain/orders" element={<Orders />} />
-                      <Route path="/supply-chain/warehouse" element={<Warehouse />} />
-
-                      {/* HR Routes */}
-                      <Route path="/hr" element={<HR />} />
-                      <Route path="/hr/payroll" element={<Payroll />} />
-                      <Route path="/hr/employees" element={<Employees />} />
-                      <Route path="/hr/recruitment" element={<Recruitment />} />
-                      <Route path="/hr/performance" element={<Performance />} />
-
-                      {/* CRM Routes */}
-                      <Route path="/crm" element={<CRM />} />
-                      <Route path="/crm/sales-automation" element={<SalesAutomation />} />
-                      <Route path="/crm/customer-service" element={<CustomerService />} />
-                      <Route path="/crm/sales-force" element={<SalesForce />} />
-
-                      {/* Manufacturing Routes */}
-                      <Route path="/manufacturing" element={<Manufacturing />} />
-                      <Route path="/manufacturing/production" element={<Production />} />
-                      <Route path="/manufacturing/quality" element={<QualityControl />} />
-                      <Route path="/manufacturing/bom" element={<BOM />} />
-
-                      {/* Project Management Routes */}
-                      <Route path="/projects" element={<Projects />} />
-                      <Route path="/projects/resources" element={<Resources />} />
-                      <Route path="/projects/time" element={<TimeTracking />} />
-                      <Route path="/projects/accounting" element={<ProjectAccounting />} />
-                    </Routes>
-                  </DashboardLayout>
+                  <DashboardLayout><Finance /></DashboardLayout>
                 </ProtectedRoute>
               } />
-              
-              {/* Redirect all other routes to login */}
-              <Route path="*" element={<Navigate to="/login" replace />} />
+              <Route path="/finance/payable" element={
+                <ProtectedRoute>
+                  <DashboardLayout><AccountsPayable /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/finance/receivable" element={
+                <ProtectedRoute>
+                  <DashboardLayout><AccountsReceivable /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/finance/ledger" element={
+                <ProtectedRoute>
+                  <DashboardLayout><GeneralLedger /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/finance/budgeting" element={
+                <ProtectedRoute>
+                  <DashboardLayout><Budgeting /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/finance/tax" element={
+                <ProtectedRoute>
+                  <DashboardLayout><TaxManagement /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+
+              {/* Protected Routes - Supply Chain */}
+              <Route path="/supply-chain" element={
+                <ProtectedRoute>
+                  <DashboardLayout><SupplyChain /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/supply-chain/inventory" element={
+                <ProtectedRoute>
+                  <DashboardLayout><Inventory /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/supply-chain/procurement" element={
+                <ProtectedRoute>
+                  <DashboardLayout><Procurement /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/supply-chain/orders" element={
+                <ProtectedRoute>
+                  <DashboardLayout><Orders /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/supply-chain/warehouse" element={
+                <ProtectedRoute>
+                  <DashboardLayout><Warehouse /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+
+              {/* Protected Routes - HR */}
+              <Route path="/hr" element={
+                <ProtectedRoute>
+                  <DashboardLayout><HR /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/hr/payroll" element={
+                <ProtectedRoute>
+                  <DashboardLayout><Payroll /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/hr/employees" element={
+                <ProtectedRoute>
+                  <DashboardLayout><Employees /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/hr/recruitment" element={
+                <ProtectedRoute>
+                  <DashboardLayout><Recruitment /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/hr/performance" element={
+                <ProtectedRoute>
+                  <DashboardLayout><Performance /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+
+              {/* Protected Routes - CRM */}
+              <Route path="/crm" element={
+                <ProtectedRoute>
+                  <DashboardLayout><CRM /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/crm/sales-automation" element={
+                <ProtectedRoute>
+                  <DashboardLayout><SalesAutomation /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/crm/customer-service" element={
+                <ProtectedRoute>
+                  <DashboardLayout><CustomerService /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/crm/sales-force" element={
+                <ProtectedRoute>
+                  <DashboardLayout><SalesForce /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+
+              {/* Protected Routes - Manufacturing */}
+              <Route path="/manufacturing" element={
+                <ProtectedRoute>
+                  <DashboardLayout><Manufacturing /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/manufacturing/production" element={
+                <ProtectedRoute>
+                  <DashboardLayout><Production /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/manufacturing/quality" element={
+                <ProtectedRoute>
+                  <DashboardLayout><QualityControl /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/manufacturing/bom" element={
+                <ProtectedRoute>
+                  <DashboardLayout><BOM /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+
+              {/* Protected Routes - Project Management */}
+              <Route path="/projects" element={
+                <ProtectedRoute>
+                  <DashboardLayout><Projects /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/projects/resources" element={
+                <ProtectedRoute>
+                  <DashboardLayout><Resources /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/projects/time" element={
+                <ProtectedRoute>
+                  <DashboardLayout><TimeTracking /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+              <Route path="/projects/accounting" element={
+                <ProtectedRoute>
+                  <DashboardLayout><ProjectAccounting /></DashboardLayout>
+                </ProtectedRoute>
+              } />
+
+              {/* Redirect all other routes to dashboard */}
+              <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
           </BrowserRouter>
         </TooltipProvider>
