@@ -73,7 +73,7 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
     }
   }, [isAuthenticated, navigate]);
   
-  return isAuthenticated ? <>{children}</> : null;
+  return isAuthenticated ? children : null;
 };
 
 const App = () => (
