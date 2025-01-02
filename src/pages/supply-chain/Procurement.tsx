@@ -17,14 +17,15 @@ export default function Procurement() {
 
   const handleNewOrder = () => {
     toast.success("Creating new purchase order...");
+    // Implementation for new order creation will go here
   };
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold">Procurement</h1>
-          <p className="text-muted-foreground mt-2">Manage purchase orders and suppliers</p>
+          <h1 className="text-3xl font-bold">Procurement Management</h1>
+          <p className="text-muted-foreground mt-2">Manage purchase orders and supplier relationships</p>
         </div>
         <Button onClick={handleNewOrder} className="gap-2">
           <Plus className="h-4 w-4" /> New Purchase Order
