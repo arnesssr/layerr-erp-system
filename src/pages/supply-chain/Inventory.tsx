@@ -2,6 +2,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { InventoryOverview } from "@/components/inventory/InventoryOverview";
 import { InventoryList } from "@/components/inventory/InventoryList";
 import { InventoryLocations } from "@/components/inventory/InventoryLocations";
+import { ProductCategories } from "@/components/inventory/ProductCategories";
+import { StockMovements } from "@/components/inventory/StockMovements";
 import { Button } from "@/components/ui/button";
 import { Plus, BarChart2, QrCode } from "lucide-react";
 
@@ -30,7 +32,9 @@ export default function Inventory() {
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="items">Items</TabsTrigger>
+          <TabsTrigger value="categories">Categories</TabsTrigger>
           <TabsTrigger value="locations">Locations</TabsTrigger>
+          <TabsTrigger value="movements">Stock Movements</TabsTrigger>
         </TabsList>
         <TabsContent value="overview" className="space-y-4">
           <InventoryOverview />
@@ -38,8 +42,14 @@ export default function Inventory() {
         <TabsContent value="items">
           <InventoryList />
         </TabsContent>
+        <TabsContent value="categories" className="space-y-4">
+          <ProductCategories />
+        </TabsContent>
         <TabsContent value="locations">
           <InventoryLocations />
+        </TabsContent>
+        <TabsContent value="movements" className="space-y-4">
+          <StockMovements />
         </TabsContent>
       </Tabs>
     </div>
