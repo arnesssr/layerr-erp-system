@@ -3,7 +3,7 @@ import { ScrollArea } from "../ui/scroll-area";
 
 export function RecentActivities() {
   return (
-    <Card className="col-span-3 lg:col-span-1">
+    <Card className="col-span-3">
       <CardHeader>
         <CardTitle>Recent Activities</CardTitle>
       </CardHeader>
