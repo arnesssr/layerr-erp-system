@@ -10,6 +10,8 @@ import {
 import { Badge } from "../ui/badge";
 import { Package2, AlertTriangle, ChevronDown, ChevronRight } from "lucide-react";
 import { useState } from "react";
+import { UoMSelector } from "./UoMSelector";
+import { formatQuantity } from "@/lib/utils/uom";
 
 const inventoryData = [
   {
@@ -18,9 +20,11 @@ const inventoryData = [
     sku: "FURN-001",
     category: "Furniture",
     supplier: "Office Solutions",
+    baseUnit: "pc",
     variants: [
-      { id: 1, size: "Large", color: "Black", quantity: 25 },
-      { id: 2, size: "Medium", color: "Black", quantity: 30 },
+      { id: 1, size: "Large", color: "Black", quantity: 25, unit: "pc" },
+      { id: 2, size: "Medium", color: "Black", quantity: 30, unit: "pc" },
+      { id: 3, size: "Large", color: "Black", quantity: 2, unit: "box" }
     ],
     lastUpdated: "2024-01-02"
   },
@@ -60,6 +64,8 @@ export function InventoryList() {
               <TableHead>Supplier</TableHead>
               <TableHead>Total Quantity</TableHead>
               <TableHead>Last Updated</TableHead>
+              <TableHead>Unit</TableHead>
+              <TableHead>Quantity</TableHead>
             </TableRow>
           </TableHeader>
           <TableBody>
@@ -104,6 +110,19 @@ export function InventoryList() {
                     <TableCell>
                       <Badge variant="secondary">
                         {variant.quantity} in stock
+                      </Badge>
+                    </TableCell>
+                    <TableCell>
+                      <UoMSelector
+                        value={variant.unit}
+                        onChange={(newUnit) => {
+                          // Handle unit change logic here
+                        }}
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Badge variant="secondary">
+                        {formatQuantity(variant.quantity, variant.unit)}
                       </Badge>
                     </TableCell>
                   </TableRow>

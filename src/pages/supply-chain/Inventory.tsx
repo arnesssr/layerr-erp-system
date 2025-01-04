@@ -5,6 +5,8 @@ import { InventoryLocations } from "@/components/inventory/InventoryLocations";
 import { ProductCategories } from "@/components/inventory/ProductCategories";
 import { StockMovements } from "@/components/inventory/StockMovements";
 import { StockValuation } from "@/components/inventory/StockValuation";
+import { AuditTrail } from "@/components/inventory/AuditTrail";
+import IntegrationMonitor from "@/components/inventory/integration/IntegrationMonitor";
 import { Button } from "@/components/ui/button";
 import { Plus, BarChart2, QrCode } from "lucide-react";
 
@@ -37,6 +39,8 @@ export default function Inventory() {
           <TabsTrigger value="locations">Locations</TabsTrigger>
           <TabsTrigger value="movements">Stock Movements</TabsTrigger>
           <TabsTrigger value="valuation">Valuation</TabsTrigger>
+          <TabsTrigger value="audit">Audit Trail</TabsTrigger>
+          <TabsTrigger value="integrations">Integrations</TabsTrigger>
         </TabsList>
         <TabsContent value="overview" className="space-y-4">
           <InventoryOverview />
@@ -55,6 +59,12 @@ export default function Inventory() {
         </TabsContent>
         <TabsContent value="valuation" className="space-y-4">
           <StockValuation />
+        </TabsContent>
+        <TabsContent value="audit" className="space-y-4">
+          <AuditTrail />
+        </TabsContent>
+        <TabsContent value="integrations" className="space-y-4">
+          <IntegrationMonitor />
         </TabsContent>
       </Tabs>
     </div>

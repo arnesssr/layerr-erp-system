@@ -133,7 +133,7 @@ export function ProductCategories() {
                           {Object.entries(variant).map(([key, value], i) => (
                             key !== 'inStock' && (
                               <Badge key={i} variant="secondary">
-                                {value}
+                                {String(value)}
                               </Badge>
                             )
                           ))}

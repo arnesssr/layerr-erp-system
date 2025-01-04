@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { DollarSign, TrendingUp, Calculator } from "lucide-react";
+import { ValuationDetails } from "./ValuationDetails";
+import { calculateFIFO, calculateLIFO, calculateWeightedAverage } from "@/utils/valuationMethods";
 
 const valuationMethods = {
   FIFO: calculateFIFO,
@@ -34,6 +37,24 @@ const stockData = [
 ];
 
 export function StockValuation() {
+  const [selectedMethod, setSelectedMethod] = useState("FIFO");
+  
+  // Get valuation based on selected method
+  const getValuation = () => {
+    switch (selectedMethod) {
+      case "FIFO":
+        return calculateFIFO(stockData[0].batches);
+      case "LIFO":
+        return calculateLIFO(stockData[0].batches);
+      case "Weighted Average":
+        return calculateWeightedAverage(stockData[0].batches);
+      default:
+        return calculateFIFO(stockData[0].batches);
+    }
+  };
+
+  const valuation = getValuation();
+
   return (
     <div className="space-y-6">
       <div className="grid gap-4 md:grid-cols-3">
@@ -52,61 +73,26 @@ export function StockValuation() {
         </Card>
       </div>
 
-      <Card>
-        <CardHeader>
-          <div className="flex items-center justify-between">
-            <CardTitle className="flex items-center gap-2">
-              <Calculator className="h-4 w-4" />
-              Stock Valuation Analysis
-            </CardTitle>
-            <Select defaultValue="FIFO">
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select method" />
-              </SelectTrigger>
-              <SelectContent>
-                {Object.keys(valuationMethods).map((method) => (
-                  <SelectItem key={method} value={method}>
-                    {method}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>SKU</TableHead>
-                <TableHead>Name</TableHead>
-                <TableHead>Total Quantity</TableHead>
-                <TableHead>Average Cost</TableHead>
-                <TableHead>Total Value</TableHead>
-                <TableHead>Last Updated</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {stockData.map((item) => {
-                const valuation = calculateWeightedAverage(item.batches);
-                return (
-                  <TableRow key={item.id}>
-                    <TableCell>{item.sku}</TableCell>
-                    <TableCell>{item.name}</TableCell>
-                    <TableCell>{valuation.totalQuantity}</TableCell>
-                    <TableCell>${valuation.averageCost.toFixed(2)}</TableCell>
-                    <TableCell>${valuation.totalValue.toFixed(2)}</TableCell>
-                    <TableCell>
-                      <Badge variant="outline">
-                        {item.batches[item.batches.length - 1].date}
-                      </Badge>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
+      <div className="flex justify-end mb-4">
+        <Select 
+          value={selectedMethod} 
+          onValueChange={setSelectedMethod}
+        >
+          <SelectTrigger className="w-[180px]">
+            <SelectValue placeholder="Select method" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="FIFO">FIFO</SelectItem>
+            <SelectItem value="LIFO">LIFO</SelectItem>
+            <SelectItem value="Weighted Average">Weighted Average</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <ValuationDetails 
+        data={valuation} 
+        method={selectedMethod} 
+      />
 
       <Card>
         <CardHeader>
@@ -161,29 +147,4 @@ export function StockValuation() {
       </Card>
     </div>
   );
-}
-
-function calculateFIFO(batches: any[]) {
-  const totalQuantity = batches.reduce((sum, batch) => sum + batch.quantity, 0);
-  const totalValue = batches.reduce((sum, batch) => sum + (batch.quantity * batch.cost), 0);
-  return {
-    totalQuantity,
-    totalValue,
-    averageCost: totalValue / totalQuantity
-  };
-}
-
-function calculateLIFO(batches: any[]) {
-  const reversedBatches = [...batches].reverse();
-  return calculateFIFO(reversedBatches);
-}
-
-function calculateWeightedAverage(batches: any[]) {
-  const totalQuantity = batches.reduce((sum, batch) => sum + batch.quantity, 0);
-  const totalValue = batches.reduce((sum, batch) => sum + (batch.quantity * batch.cost), 0);
-  return {
-    totalQuantity,
-    totalValue,
-    averageCost: totalValue / totalQuantity
-  };
 }
