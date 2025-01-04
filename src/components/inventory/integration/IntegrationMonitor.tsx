@@ -15,38 +15,34 @@ import {
 } from "lucide-react";
 
 export default function IntegrationMonitor() {
-  const { 
-    pendingTransactions, 
-    processedTransactions, 
-    syncStatus 
-  } = useIntegrationStore();
-
-  const moduleStats = {
-    sales: processedTransactions.filter(t => t.module === 'sales').length,
-    purchase: processedTransactions.filter(t => t.module === 'purchase').length,
-    accounting: processedTransactions.filter(t => t.module === 'accounting').length,
-  };
+  const {
+    pendingTransactions,
+    processedTransactions,
+    syncStatus,
+    integrationStatus
+  } = useIntegrationStore(state => ({
+    pendingTransactions: state.pendingTransactions,
+    processedTransactions: state.processedTransactions,
+    syncStatus: state.syncStatus,
+    integrationStatus: state.integrationStatus
+  }));
 
   return (
-    <Card>
-      <CardHeader>
-        <div className="flex items-center justify-between">
-          <CardTitle className="flex items-center gap-2">
-            <ArrowDownUp className="h-5 w-5" />
-            Module Integration Status
-          </CardTitle>
-          <Badge variant={getSyncStatusVariant(syncStatus)}>
-            {syncStatus === 'syncing' && <RefreshCw className="mr-2 h-4 w-4 animate-spin" />}
-            {syncStatus === 'error' && <AlertTriangle className="mr-2 h-4 w-4" />}
-            {syncStatus === 'idle' && <CheckCircle2 className="mr-2 h-4 w-4" />}
-            {getSyncStatusText(syncStatus)}
-          </Badge>
-        </div>
-      </CardHeader>
-      <CardContent>
-        // ...rest of the component implementation...
-      </CardContent>
-    </Card>
+    <div className="space-y-4">
+      <div className="p-4 border rounded">
+        <h3 className="font-medium">Integration Status</h3>
+        <p>Sync Status: {syncStatus}</p>
+        <p>Pending Transactions: {pendingTransactions.length}</p>
+        <p>Processed Transactions: {processedTransactions.length}</p>
+      </div>
+      
+      {/* Health Status */}
+      <div className="p-4 border rounded">
+        <h3 className="font-medium">System Health</h3>
+        <p>Overall: {integrationStatus.healthCheck.overall}</p>
+        <p>Last Updated: {new Date(integrationStatus.healthCheck.lastUpdated).toLocaleString()}</p>
+      </div>
+    </div>
   );
 }
 

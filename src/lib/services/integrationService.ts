@@ -1,6 +1,11 @@
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 import { RateLimiter } from '../../utils/RateLimiter';
 import { WebhookHandler } from '../../utils/WebhookHandler';
+
+// Add cache implementation
+const forecastCache = new Map<string, { data: InventoryForecast; timestamp: number }>();
+const CACHE_TTL = 5 * 60 * 1000; // 5 minutes in milliseconds
 
 interface Transaction {
   id: string;
@@ -103,134 +108,172 @@ interface IntegrationLog {
 const rateLimiter = new RateLimiter({ maxRequests: 100, timeWindow: 60000 });
 const webhookHandler = new WebhookHandler();
 
-export const useIntegrationStore = create<IntegrationState>((set, get) => ({
-  pendingTransactions: [],
-  processedTransactions: [],
-  syncStatus: 'idle',
-  addTransaction: (transaction) =>
-    set((state) => ({
-      pendingTransactions: [...state.pendingTransactions, transaction],
-    })),
-  processTransaction: (transactionId) =>
-    set((state) => {
-      const transaction = state.pendingTransactions.find((t) => t.id === transactionId);
-      if (!transaction) return state;
-      return {
-        pendingTransactions: state.pendingTransactions.filter((t) => t.id !== transactionId),
-        processedTransactions: [...state.processedTransactions, { ...transaction, status: 'completed' }],
-      };
-    }),
-  setSyncStatus: (status) => set({ syncStatus: status }),
-  inventorySync: {
-    lastSync: '',
-    batchSize: 50,
-    retryAttempts: 3,
-    forecast: [],
-  },
-  syncInventory: async (items: InventoryItem[]) => {
-    await rateLimiter.checkLimit();
-    set({ syncStatus: 'syncing' });
-
-    try {
-      const batches = chunk(items, get().inventorySync.batchSize);
-
-      for (const batch of batches) {
-        await processBatch(batch);
-        webhookHandler.notify('inventory.updated', { items: batch });
-      }
-
-      set(state => ({
-        inventorySync: {
-          ...state.inventorySync,
-          lastSync: new Date().toISOString()
-        },
-        syncStatus: 'idle'
-      }));
-    } catch (error) {
-      set({ syncStatus: 'error' });
-      throw error;
-    }
-  },
-  getForecast: async (sku: string) => {
-    const forecast = await calculateForecast(sku);
-    set(state => ({
+export const useIntegrationStore = create(
+  persist<IntegrationState>(
+    (set, get) => ({
+      pendingTransactions: [],
+      processedTransactions: [],
+      syncStatus: 'idle',
+      addTransaction: (transaction) =>
+        set((state) => ({
+          pendingTransactions: [...state.pendingTransactions, transaction],
+        })),
+      processTransaction: (transactionId) =>
+        set((state) => {
+          const transaction = state.pendingTransactions.find((t) => t.id === transactionId);
+          if (!transaction) return state;
+          return {
+            pendingTransactions: state.pendingTransactions.filter((t) => t.id !== transactionId),
+            processedTransactions: [...state.processedTransactions, { ...transaction, status: 'completed' }],
+          };
+        }),
+      setSyncStatus: (status) => set({ syncStatus: status }),
       inventorySync: {
-        ...state.inventorySync,
-        forecast: [...state.inventorySync.forecast, forecast]
-      }
-    }));
-    return forecast;
-  },
-  integrationStatus: {
-    systems: [],
-    healthCheck: {
-      overall: 'healthy',
-      lastUpdated: new Date().toISOString(),
-      checks: { database: true, api: true, queue: true }
-    },
-    errors: [],
-    metrics: {
-      successfulSync: 0,
-      failedSync: 0,
-      averageResponseTime: 0,
-      lastDayTransactions: 0,
-      activeConnections: 0
-    },
-    logs: []
-  },
-  checkSystemStatus: async () => {
-    const systems = [
-      { name: 'WMS', endpoint: '/api/wms/health' },
-      { name: 'ERP', endpoint: '/api/erp/health' },
-      { name: 'POS', endpoint: '/api/pos/health' }
-    ];
+        lastSync: '',
+        batchSize: 50,
+        retryAttempts: 3,
+        forecast: [],
+      },
+      syncInventory: async (items: InventoryItem[]) => {
+        await rateLimiter.checkLimit();
+        set({ syncStatus: 'syncing' });
 
-    const statuses = await Promise.all(
-      systems.map(async (sys) => {
-        const start = Date.now();
+        // Process in smaller chunks to prevent memory issues
+        const CHUNK_SIZE = 20;
+        const batches = chunk(items, CHUNK_SIZE);
+
         try {
-          await fetch(sys.endpoint);
-          return {
-            name: sys.name,
-            status: 'online',
-            lastCheck: new Date().toISOString(),
-            responseTime: Date.now() - start,
-            endpoint: sys.endpoint
-          } as SystemStatus;
-        } catch (error) {
-          return {
-            name: sys.name,
-            status: 'offline',
-            lastCheck: new Date().toISOString(),
-            responseTime: -1,
-            endpoint: sys.endpoint
-          } as SystemStatus;
-        }
-      })
-    );
+          await Promise.all(
+            batches.map(async (batch) => {
+              await processBatch(batch);
+              webhookHandler.notify('inventory.updated', { items: batch });
+            })
+          );
 
-    set(state => ({
+          set(state => ({
+            inventorySync: {
+              ...state.inventorySync,
+              lastSync: new Date().toISOString()
+            },
+            syncStatus: 'idle'
+          }));
+        } catch (error) {
+          set({ syncStatus: 'error' });
+          throw error;
+        }
+      },
+
+      // Replace memo wrapped function with cached implementation
+      getForecast: async (sku: string) => {
+        const now = Date.now();
+        const cached = forecastCache.get(sku);
+        
+        // Return cached data if valid
+        if (cached && (now - cached.timestamp) < CACHE_TTL) {
+          return cached.data;
+        }
+
+        // Calculate new forecast
+        const forecast = await calculateForecast(sku);
+        
+        // Update cache
+        forecastCache.set(sku, {
+          data: forecast,
+          timestamp: now
+        });
+
+        // Update state
+        set(state => ({
+          inventorySync: {
+            ...state.inventorySync,
+            forecast: [...state.inventorySync.forecast, forecast]
+          }
+        }));
+
+        return forecast;
+      },
       integrationStatus: {
-        ...state.integrationStatus,
-        systems: statuses
-      }
-    }));
-  },
-  logError: (error: ErrorLog) => 
-    set(state => ({
-      integrationStatus: {
-        ...state.integrationStatus,
-        errors: [...state.integrationStatus.errors, error]
-      }
-    })),
-  updateMetrics: (metrics: Partial<IntegrationMetrics>) =>
-    set(state => ({
-      integrationStatus: {
-        ...state.integrationStatus,
-        metrics: { ...state.integrationStatus.metrics, ...metrics }
-      }
-    }))
-}));
+        systems: [],
+        healthCheck: {
+          overall: 'healthy',
+          lastUpdated: new Date().toISOString(),
+          checks: { database: true, api: true, queue: true }
+        },
+        errors: [],
+        metrics: {
+          successfulSync: 0,
+          failedSync: 0,
+          averageResponseTime: 0,
+          lastDayTransactions: 0,
+          activeConnections: 0
+        },
+        logs: []
+      },
+      checkSystemStatus: async () => {
+        const systems = [
+          { name: 'WMS', endpoint: '/api/wms/health' },
+          { name: 'ERP', endpoint: '/api/erp/health' },
+          { name: 'POS', endpoint: '/api/pos/health' }
+        ];
+
+        const statuses = await Promise.all(
+          systems.map(async (sys) => {
+            const start = Date.now();
+            try {
+              await fetch(sys.endpoint);
+              return {
+                name: sys.name,
+                status: 'online',
+                lastCheck: new Date().toISOString(),
+                responseTime: Date.now() - start,
+                endpoint: sys.endpoint
+              } as SystemStatus;
+            } catch (error) {
+              return {
+                name: sys.name,
+                status: 'offline',
+                lastCheck: new Date().toISOString(),
+                responseTime: -1,
+                endpoint: sys.endpoint
+              } as SystemStatus;
+            }
+          })
+        );
+
+        set(state => ({
+          integrationStatus: {
+            ...state.integrationStatus,
+            systems: statuses
+          }
+        }));
+      },
+      logError: (error: ErrorLog) => 
+        set(state => ({
+          integrationStatus: {
+            ...state.integrationStatus,
+            errors: [...state.integrationStatus.errors, error]
+          }
+        })),
+      updateMetrics: (metrics: Partial<IntegrationMetrics>) =>
+        set(state => ({
+          integrationStatus: {
+            ...state.integrationStatus,
+            metrics: { ...state.integrationStatus.metrics, ...metrics }
+          }
+        }))
+    }),
+    {
+      name: 'integration-storage',
+      partialize: (state: IntegrationState) => ({
+        pendingTransactions: state.pendingTransactions,
+        processedTransactions: state.processedTransactions,
+        syncStatus: state.syncStatus,
+        inventorySync: state.inventorySync,
+        integrationStatus: state.integrationStatus
+      })
+    }
+  )
+);
 
 async function processBatch(items: InventoryItem[]): Promise<void> {
   // Implementation for processing inventory batches
