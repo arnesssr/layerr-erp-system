@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
 import { RateLimiter } from '../../utils/RateLimiter';
 import { WebhookHandler } from '../../utils/WebhookHandler';
 
@@ -108,8 +108,17 @@ interface IntegrationLog {
 const rateLimiter = new RateLimiter({ maxRequests: 100, timeWindow: 60000 });
 const webhookHandler = new WebhookHandler();
 
-export const useIntegrationStore = create(
-  persist<IntegrationState>(
+// Define which part of the state should be persisted
+type PersistedState = Pick<IntegrationState, 
+  'pendingTransactions' | 
+  'processedTransactions' | 
+  'syncStatus' | 
+  'inventorySync' | 
+  'integrationStatus'
+>;
+
+export const useIntegrationStore = create<IntegrationState>()(
+  persist(
     (set, get) => ({
       pendingTransactions: [],
       processedTransactions: [],
@@ -264,7 +273,8 @@ export const useIntegrationStore = create(
     }),
     {
       name: 'integration-storage',
-      partialize: (state: IntegrationState) => ({
+      storage: createJSONStorage(() => localStorage),
+      partialize: (state): PersistedState => ({
         pendingTransactions: state.pendingTransactions,
         processedTransactions: state.processedTransactions,
         syncStatus: state.syncStatus,

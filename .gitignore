@@ -1,8 +1,7 @@
 # Dependencies
 node_modules
-package-lock.json
-yarn.lock
-pnpm-lock.yaml
+.pnp
+.pnp.js
 
 # Build outputs
 dist
@@ -10,6 +9,10 @@ dist-ssr
 build
 out
 .output
+
+# Cache
+.cache
+.npm
 
 # Logs
 logs
@@ -23,6 +26,10 @@ lerna-debug.log*
 # Environment
 .env
 .env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
 !.env.example
 
 # Development
@@ -31,9 +38,7 @@ coverage
 .nyc_output
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-!.vscode/settings.json
+.vscode
 .idea
 .DS_Store
 *.suo

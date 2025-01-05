@@ -15,10 +15,13 @@ export default defineConfig({
     },
   },
   server: {
-    port: 3000,
+    port: 3001,  // Changed port
+    host: true,  // Changed from '0.0.0.0' to true
+    strictPort: true,  // Add this to ensure port is available
     open: true,
     hmr: {
-      overlay: false
+      overlay: false,
+      clientPort: 3001  // Add explicit client port
     },
     watch: {
       usePolling: false

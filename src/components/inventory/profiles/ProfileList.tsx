@@ -17,12 +17,12 @@ export const ProfileList = memo(() => {
         <div ref={parentRef} className="h-[400px] overflow-auto">
             <div
                 style={{
-                    height: `${rowVirtualizer.totalSize}px`,
+                    height: `${rowVirtualizer.getTotalSize()}px`,
                     width: '100%',
                     position: 'relative',
                 }}
             >
-                {rowVirtualizer.virtualItems.map((virtualRow) => {
+                {rowVirtualizer.getVirtualItems().map((virtualRow) => {
                     const profile = profiles[virtualRow.index];
                     return (
                         <div

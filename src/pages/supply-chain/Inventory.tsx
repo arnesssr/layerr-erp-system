@@ -6,9 +6,14 @@ import { ProductCategories } from "@/components/inventory/ProductCategories";
 import { StockMovements } from "@/components/inventory/StockMovements";
 import { StockValuation } from "@/components/inventory/StockValuation";
 import { AuditTrail } from "@/components/inventory/AuditTrail";
-import IntegrationMonitor from "@/components/inventory/integration/IntegrationMonitor";
 import { Button } from "@/components/ui/button";
 import { Plus, BarChart2, QrCode } from "lucide-react";
+import { Suspense, lazy } from 'react';
+
+// Replace dynamic import with React.lazy
+const IntegrationMonitor = lazy(() => 
+  import('@/components/inventory/integration/IntegrationMonitor')
+);
 
 export default function Inventory() {
   return (
@@ -64,9 +69,33 @@ export default function Inventory() {
           <AuditTrail />
         </TabsContent>
         <TabsContent value="integrations" className="space-y-4">
-          <IntegrationMonitor />
+          <Suspense fallback={
+            <div className="flex items-center justify-center h-[200px]">
+              <div className="text-center animate-pulse">
+                <div className="h-8 w-8 mx-auto mb-4 rounded-full border-2 border-t-transparent border-blue-500 animate-spin" />
+                <p>Loading integration features...</p>
+              </div>
+            </div>
+          }>
+            <ErrorBoundary>
+              <IntegrationMonitor />
+            </ErrorBoundary>
+          </Suspense>
         </TabsContent>
       </Tabs>
+    </div>
+  );
+}
+
+function ErrorBoundary({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="relative">
+      <div className="relative z-10">{children}</div>
+      <div className="absolute inset-0 z-0 flex items-center justify-center">
+        <div className="p-4 text-red-500">
+          If you see this, something went wrong loading the integration module.
+        </div>
+      </div>
     </div>
   );
 }
