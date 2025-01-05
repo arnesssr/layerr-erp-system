@@ -1,27 +1,41 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import path from "path";
-import { splitVendorChunkPlugin } from 'vite';
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),  // Remove fastRefresh option
-    splitVendorChunkPlugin()
-  ],
+  plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      '@': path.resolve(__dirname, './src'),
     },
   },
+  build: {
+    outDir: 'dist',
+    sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-ui': ['@radix-ui/react-tabs', '@radix-ui/react-dialog'],
+          'vendor-utils': ['zustand', 'clsx', 'tailwind-merge'],
+          'inventory': [
+            './src/components/inventory/InventoryList',
+            './src/components/inventory/InventoryAnalytics',
+            './src/components/inventory/integration/IntegrationMonitor'
+          ]
+        }
+      }
+    },
+    chunkSizeWarningLimit: 1000
+  },
   server: {
-    port: 3001,  // Changed port
-    host: true,  // Changed from '0.0.0.0' to true
-    strictPort: true,  // Add this to ensure port is available
+    port: 3000,
     open: true,
+    host: true,
+    strictPort: true,
     hmr: {
       overlay: false,
-      clientPort: 3001  // Add explicit client port
+      clientPort: 3001
     },
     watch: {
       usePolling: false
@@ -29,16 +43,5 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: ['react', 'react-dom', 'zustand']
-  },
-  build: {
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          vendor: ['react', 'react-dom', 'zustand'],
-          utils: ['@/utils/RateLimiter', '@/utils/WebhookHandler']
-        }
-      }
-    },
-    chunkSizeWarningLimit: 1000
   }
 });
