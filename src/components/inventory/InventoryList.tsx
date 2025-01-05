@@ -32,7 +32,6 @@ const inventoryData = [
     ],
     lastUpdated: "2024-01-02"
   },
-  // Add more items...
 ];
 
 export function InventoryList({ searchQuery }: InventoryListProps) {
@@ -46,7 +45,6 @@ export function InventoryList({ searchQuery }: InventoryListProps) {
     );
   };
 
-  // Filter items based on search query
   const filteredItems = inventoryData.filter(item => 
     searchQuery
       ? item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -128,7 +126,7 @@ export function InventoryList({ searchQuery }: InventoryListProps) {
                       <UoMSelector
                         value={variant.unit}
                         onChange={(newUnit) => {
-                          // Handle unit change logic here
+                          console.log('Unit changed:', newUnit);
                         }}
                       />
                     </TableCell>
