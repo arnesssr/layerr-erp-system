@@ -13,6 +13,10 @@ import { useState } from "react";
 import { UoMSelector } from "./UoMSelector";
 import { formatQuantity } from "@/lib/utils/uom";
 
+interface InventoryListProps {
+  searchQuery: string;
+}
+
 const inventoryData = [
   {
     id: "INV001",
@@ -31,7 +35,7 @@ const inventoryData = [
   // Add more items...
 ];
 
-export function InventoryList() {
+export function InventoryList({ searchQuery }: InventoryListProps) {
   const [expandedItems, setExpandedItems] = useState<string[]>([]);
 
   const toggleExpand = (id: string) => {
@@ -42,6 +46,14 @@ export function InventoryList() {
     );
   };
 
+  // Filter items based on search query
+  const filteredItems = inventoryData.filter(item => 
+    searchQuery
+      ? item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.sku.toLowerCase().includes(searchQuery.toLowerCase())
+      : true
+  );
+
   return (
     <Card>
       <CardHeader>
@@ -49,7 +61,7 @@ export function InventoryList() {
           <CardTitle>Inventory Items</CardTitle>
           <Badge variant="secondary" className="flex items-center">
             <Package2 className="mr-1 h-4 w-4" />
-            {inventoryData.length} Items
+            {filteredItems.length} Items
           </Badge>
         </div>
       </CardHeader>
@@ -69,7 +81,7 @@ export function InventoryList() {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {inventoryData.map((item) => (
+            {filteredItems.map((item) => (
               <>
                 <TableRow 
                   key={item.id}
