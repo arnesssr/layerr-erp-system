@@ -1,20 +1,17 @@
-import * as React from "react"
+import React from 'react';
 
-import { cn } from "@/lib/utils"
+export const Card = ({ children }) => {
+  return <div className="card">{children}</div>;
+};
 
-const Card = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement>
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn(
-      "rounded-lg border bg-card text-card-foreground shadow-sm",
-      className
-    )}
-    {...props}
-  />
-))
-Card.displayName = "Card"
+export const CardContent = ({ children }) => {
+  return <div className="card-content">{children}</div>;
+};
 
-export { Card }
+export const CardHeader = ({ children }) => {
+  return <div className="card-header">{children}</div>;
+};
+
+export const CardTitle = ({ children }) => {
+  return <div className="card-title">{children}</div>;
+};
