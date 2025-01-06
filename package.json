@@ -12,6 +12,8 @@
     "lint": "eslint .",
     "test": "vitest",
     "test:coverage": "vitest run --coverage"
+    "build:dev": "vite build --mode development"
+
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
