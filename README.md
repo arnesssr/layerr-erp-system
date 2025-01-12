@@ -6,6 +6,11 @@
 
 **Author**: [James Abira (arnesssr)](https://github.com/arnesssr)
 
+
+![Screenshot 2025-01-12 at 18-17-40 LAYR ERP System](https://github.com/user-attachments/assets/552b98c1-3010-4c6a-9866-f799e3be3b08)
+
+
+
 ## Features
 
 - **Customizable Dashboards**: Tailor the interface to suit your business needs.
@@ -107,9 +112,6 @@ Deploying the LAYR frontend is quick and seamless.
    - **Build Command**: `npm run build`
    - **Output Directory**: `dist`
 4. Deploy your application and access it at your custom Vercel domain.
-
-## Custom Domain![Screenshot 2025-01-12 at 18-17-40 LAYR ERP System](https://github.com/user-attachments/assets/a618ca9b-bd33-47ab-b038-4d6e4fc9ba34)
-
 
 To use your own domain, follow the steps in Netlify or Vercel documentation:
 
