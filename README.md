@@ -113,8 +113,6 @@ Deploying the LAYR frontend is quick and seamless.
    - **Output Directory**: `dist`
 4. Deploy your application and access it at your custom Vercel domain.
 
-## Custom Domain!
-
 To use your own domain, follow the steps in Netlify or Vercel documentation:
 
 - [Netlify Custom Domains](https://docs.netlify.com/domains-https/custom-domains/)
