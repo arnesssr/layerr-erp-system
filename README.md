@@ -5,6 +5,8 @@
 **LAYR Automation Cloud** is a modern, intuitive, and powerful ERP (Enterprise Resource Planning) system designed to streamline business processes, increase efficiency, and support scalability for organizations of any size. This repository houses the **frontend** of the system, ensuring a sleek and user-friendly experience.
 
 **Author**: [James Abira (arnesssr)](https://github.com/arnesssr)
+[Screenshot 2025-01-12 at 18-17-40 LAYR ERP System](https://github.com/user-attachments/assets/a618ca9b-bd33-47ab-b038-4d6e4fc9ba34)
+
 
 ## Features
 
@@ -108,8 +110,7 @@ Deploying the LAYR frontend is quick and seamless.
    - **Output Directory**: `dist`
 4. Deploy your application and access it at your custom Vercel domain.
 
-## Custom Domain![Screenshot 2025-01-12 at 18-17-40 LAYR ERP System](https://github.com/user-attachments/assets/a618ca9b-bd33-47ab-b038-4d6e4fc9ba34)
-
+## Custom Domain!
 
 To use your own domain, follow the steps in Netlify or Vercel documentation:
 
