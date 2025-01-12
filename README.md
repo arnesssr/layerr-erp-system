@@ -108,7 +108,8 @@ Deploying the LAYR frontend is quick and seamless.
    - **Output Directory**: `dist`
 4. Deploy your application and access it at your custom Vercel domain.
 
-## Custom Domain
+## Custom Domain![Screenshot 2025-01-12 at 18-17-40 LAYR ERP System](https://github.com/user-attachments/assets/a618ca9b-bd33-47ab-b038-4d6e4fc9ba34)
+
 
 To use your own domain, follow the steps in Netlify or Vercel documentation:
 
