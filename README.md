@@ -7,7 +7,7 @@
 **Author**: [James Abira (arnesssr)](https://github.com/arnesssr)
 
 
-![Screenshot 2025-01-12 at 18-17-40 LAYR ERP System](https://github.com/user-attachments/assets/552b98c1-3010-4c6a-9866-f799e3be3b08)
+![Screenshot 2025-01-12 at 18-17-40 LAYER ERP System](https://github.com/user-attachments/assets/552b98c1-3010-4c6a-9866-f799e3be3b08)
 
 
 
@@ -77,7 +77,7 @@ There are multiple ways to contribute, edit, or enhance this project:
 
 ### Direct Edits via GitHub
 
-1. Open the repository in your GitHub account: [LAYR Frontend Repo](https://github.com/arnesssr/layr-erp-system)
+1. Open the repository in your GitHub account: [LAYER Frontend Repo](https://github.com/arnesssr/layr-erp-system)
 2. Navigate to the file you wish to edit.
 3. Click the pencil icon to edit the file.
 4. Commit the changes directly to the main branch or create a pull request.
