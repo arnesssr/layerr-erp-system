@@ -2,7 +2,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, Outlet } from "react-router-dom";
 import { DashboardLayout } from "./components/DashboardLayout";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { AuthProvider } from "./components/auth/AuthContext";
@@ -24,7 +24,6 @@ import GeneralLedger from "./pages/finance/GeneralLedger";
 import Budgeting from "./pages/finance/Budgeting";
 import TaxManagement from "./pages/finance/TaxManagement";
 
-// Supply Chain Management
 import SupplyChain from "./pages/supply-chain/SupplyChain";
 import Inventory from "./pages/supply-chain/Inventory";
 import Procurement from "./pages/supply-chain/Procurement";
@@ -74,8 +73,8 @@ const App = () => (
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               
-              {/* Main Routes */}
-              <Route path="/" element={<DashboardLayout />}>
+              {/* Dashboard Routes */}
+              <Route element={<DashboardLayout><Outlet /></DashboardLayout>}>
                 <Route index element={<Dashboard />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/calendar" element={<Calendar />} />
