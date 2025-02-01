@@ -2,7 +2,8 @@ import { Suspense, lazy } from 'react';
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ErrorBoundary } from "@/components/ui/error-boundary";
-import InventoryList from '@/components/inventory/InventoryList'
+import InventoryList from '@/components/inventory/InventoryList';
+import InventoryFeatures from '@/components/inventory/InventoryFeatures';
 
 // Lazy load components
 const InventoryAnalytics = lazy(() => import("@/components/inventory/InventoryAnalytics").then(module => ({ default: module.default })));
@@ -22,14 +23,19 @@ export default function Inventory() {
   return (
     <div className="space-y-6">
       <ErrorBoundary fallback={<div>Something went wrong. Please try again.</div>}>
-        <Tabs defaultValue="list" className="space-y-4">
-          <TabsList className="grid w-full grid-cols-3 lg:w-[400px]">
+        <Tabs defaultValue="features" className="space-y-4">
+          <TabsList className="grid w-full grid-cols-4 lg:w-[600px]">
+            <TabsTrigger value="features">Features</TabsTrigger>
             <TabsTrigger value="list">Inventory List</TabsTrigger>
             <TabsTrigger value="analytics">Analytics</TabsTrigger>
             <TabsTrigger value="integration">Integration</TabsTrigger>
           </TabsList>
 
           <Suspense fallback={<LoadingFallback />}>
+            <TabsContent value="features" className="space-y-4">
+              <InventoryFeatures />
+            </TabsContent>
+
             <TabsContent value="list" className="space-y-4">
               <InventoryList />
             </TabsContent>
