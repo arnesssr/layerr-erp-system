@@ -4,7 +4,7 @@
 
 **LAYR Automation Cloud** is a modern, intuitive, and powerful ERP (Enterprise Resource Planning) system designed to streamline business processes, increase efficiency, and support scalability for organizations of any size. This repository houses the **frontend** of the system, ensuring a sleek and user-friendly experience.
 
-**GitHub Profile**: [James Abira (arnesssr)](https://github.com/arnesssr)
+**Author**: [James Abira (arnesssr)](https://github.com/arnesssr)
 
 ## Features
 
